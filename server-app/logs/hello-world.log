@@ -1,0 +1,4 @@
+INFO  [2016-09-14 15:15:26,906] org.eclipse.jetty.server.AbstractConnector: Stopped application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-14 15:15:26,910] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-14 15:15:26,917] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3c904f1e{/,null,UNAVAILABLE}
+INFO  [2016-09-14 15:15:26,925] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@17b64941{/,null,UNAVAILABLE}

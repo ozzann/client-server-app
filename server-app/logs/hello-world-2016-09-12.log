@@ -1,0 +1,151 @@
+INFO  [2016-09-12 08:46:44,681] org.eclipse.jetty.server.AbstractConnector: Stopped application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:46:44,683] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:46:44,686] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3c904f1e{/,null,UNAVAILABLE}
+INFO  [2016-09-12 08:46:44,691] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@17b64941{/,null,UNAVAILABLE}
+INFO  [2016-09-12 08:46:50,461] org.eclipse.jetty.util.log: Logging initialized @1379ms
+INFO  [2016-09-12 08:46:50,556] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-12 08:46:50,557] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-12 08:46:50,558] com.example.HelloWorldApplication: Start hello-world app
+INFO  [2016-09-12 08:46:50,561] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-12 08:46:50,561] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-12 08:46:50,569] io.dropwizard.server.ServerFactory: Starting HelloWorld
+================================================================================
+
+                              HelloWorld
+
+================================================================================
+
+
+INFO  [2016-09-12 08:46:50,705] org.eclipse.jetty.setuid.SetUIDListener: Opened application@120f38e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:46:50,705] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@7a0e1b5e{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:46:50,707] org.eclipse.jetty.server.Server: jetty-9.3.9.v20160517
+INFO  [2016-09-12 08:46:51,170] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.resources.HelloWorldResource)
+
+INFO  [2016-09-12 08:46:51,171] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3d49fd31{/,null,AVAILABLE}
+INFO  [2016-09-12 08:46:51,175] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2016-09-12 08:46:51,180] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5a8cbffe{/,null,AVAILABLE}
+INFO  [2016-09-12 08:46:51,187] org.eclipse.jetty.server.AbstractConnector: Started application@120f38e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:46:51,188] org.eclipse.jetty.server.AbstractConnector: Started admin@7a0e1b5e{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:46:51,188] org.eclipse.jetty.server.Server: Started @2107ms
+INFO  [2016-09-12 08:46:51,345] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 08:46:51,445] org.eclipse.jetty.server.AbstractConnector: Stopped application@120f38e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:46:51,446] org.eclipse.jetty.server.AbstractConnector: Stopped admin@7a0e1b5e{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:46:51,447] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5a8cbffe{/,null,UNAVAILABLE}
+INFO  [2016-09-12 08:46:51,449] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3d49fd31{/,null,UNAVAILABLE}
+INFO  [2016-09-12 08:47:04,236] org.eclipse.jetty.util.log: Logging initialized @1153ms
+INFO  [2016-09-12 08:47:04,326] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-12 08:47:04,327] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-12 08:47:04,327] com.example.HelloWorldApplication: Start hello-world app
+INFO  [2016-09-12 08:47:04,330] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-12 08:47:04,330] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-12 08:47:04,338] io.dropwizard.server.ServerFactory: Starting HelloWorld
+================================================================================
+
+                              HelloWorld
+
+================================================================================
+
+
+INFO  [2016-09-12 08:47:04,460] org.eclipse.jetty.setuid.SetUIDListener: Opened application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:47:04,460] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:47:04,462] org.eclipse.jetty.server.Server: jetty-9.3.z-SNAPSHOT
+INFO  [2016-09-12 08:47:04,896] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.resources.HelloWorldResource)
+
+INFO  [2016-09-12 08:47:04,897] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@17b64941{/,null,AVAILABLE}
+INFO  [2016-09-12 08:47:04,901] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2016-09-12 08:47:04,905] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3c904f1e{/,null,AVAILABLE}
+INFO  [2016-09-12 08:47:04,914] org.eclipse.jetty.server.AbstractConnector: Started application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:47:04,914] org.eclipse.jetty.server.AbstractConnector: Started admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:47:04,915] org.eclipse.jetty.server.Server: Started @1833ms
+INFO  [2016-09-12 08:47:11,983] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 08:59:47,569] org.eclipse.jetty.server.AbstractConnector: Stopped application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 08:59:47,571] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 08:59:47,572] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3c904f1e{/,null,UNAVAILABLE}
+INFO  [2016-09-12 08:59:47,574] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@17b64941{/,null,UNAVAILABLE}
+INFO  [2016-09-12 09:09:31,145] org.eclipse.jetty.util.log: Logging initialized @1151ms
+INFO  [2016-09-12 09:09:31,235] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-12 09:09:31,235] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-12 09:09:31,235] com.example.HelloWorldApplication: Start hello-world app
+INFO  [2016-09-12 09:09:31,239] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-12 09:09:31,239] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-12 09:09:31,246] io.dropwizard.server.ServerFactory: Starting HelloWorld
+================================================================================
+
+                              HelloWorld
+
+================================================================================
+
+
+INFO  [2016-09-12 09:09:31,367] org.eclipse.jetty.setuid.SetUIDListener: Opened application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 09:09:31,368] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 09:09:31,371] org.eclipse.jetty.server.Server: jetty-9.3.z-SNAPSHOT
+INFO  [2016-09-12 09:09:31,784] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.resources.HelloWorldResource)
+
+INFO  [2016-09-12 09:09:31,785] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@17b64941{/,null,AVAILABLE}
+INFO  [2016-09-12 09:09:31,788] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2016-09-12 09:09:31,792] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3c904f1e{/,null,AVAILABLE}
+INFO  [2016-09-12 09:09:31,799] org.eclipse.jetty.server.AbstractConnector: Started application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-12 09:09:31,800] org.eclipse.jetty.server.AbstractConnector: Started admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-12 09:09:31,800] org.eclipse.jetty.server.Server: Started @1808ms
+INFO  [2016-09-12 09:09:35,053] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:14:44,837] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:17:13,830] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:17:33,030] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:21:27,864] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:27:17,213] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:27:48,698] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:29:38,218] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:30:09,519] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:38:40,973] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:54:20,879] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 09:59:15,318] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 10:06:16,044] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:14:31,739] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:15:48,486] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:17:55,252] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:20:30,764] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:22:11,593] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:22:39,070] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:23:15,568] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:24:21,375] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:25:22,040] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:26:55,814] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:27:32,767] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:28:16,260] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 11:28:57,177] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:35:13,450] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:36:30,150] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:37:09,396] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:39:58,247] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:51:52,260] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:53:09,998] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 12:56:09,740] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:44:25,495] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:44:26,743] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:44:26,925] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:44:27,104] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:44:35,166] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:45:06,683] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:45:25,257] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:45:41,715] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:45:48,339] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:45:49,647] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-12 15:45:50,312] com.example.resources.HelloWorldResource: GET /hello-world

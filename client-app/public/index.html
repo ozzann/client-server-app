@@ -1,0 +1,112 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple ping server app</title>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"  type="text/css" href="/css/style.css">
+</head>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#pingBtn').click(function() {
+            var name = $("#name").val().trim();
+
+            $.ajax({
+                url: 'http://localhost:3000/hello/' + name,
+                type: 'GET',
+                success: function(data){
+                  appendRow(data);
+                },
+                error: function(data){
+                  var errorMsg =
+                    '{"id":"","error":"1","content":"Error: could not connect to the server"}';
+                  appendRow(errorMsg);
+                }
+            });
+
+            function appendRow(data){
+                var requestTime = new Date().toLocaleString();
+
+                var dataObj = jQuery.parseJSON(data);
+
+                var rowHtml = !dataObj.error ? '<tr>'
+                  : '<tr class="errorRow">';
+
+                rowHtml += '<td>' + dataObj.id + '</td>';
+                rowHtml += '<td>' + dataObj.content + '</td>';
+                rowHtml += '<td>' + requestTime + '</td>';
+
+                rowHtml += '</tr>';
+                $('#responsesTable').append(rowHtml);
+
+                // Point out to last response
+                $('#responses').scrollTop($('#responses')[0].scrollHeight);
+            }
+        });
+
+        $('#resetTable').click(function() {
+            $("#responsesTable tbody tr").remove();
+
+
+        });
+    });
+</script>
+
+<body>
+  <div id="wrapper" class="row">
+    <div class="col-md-8 col-md-offset-2 well">
+      <div id="info">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+           <p id="description" align="center">
+             There is a server at <strong>http://localhost:9080</strong>.
+             It always answers if you ask it.<br/>
+             Let's say hello to the server and see what it'll say back.
+           </p>
+          </div>
+        </div>
+        <div id="btns" class="row">
+          <div class="col-md-4 col-md-offset-3" align="center" >
+            <input type="text" class="form-control" id="name" placeholder="Your name...">
+          </div>
+          <div class="col-md-3">
+            <div class="btn btn-primary" align="center" id="pingBtn">Say hello!</div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row" id="tableTitle">
+        <div class="col-md-10 col-md-offset-1">
+          <p align="center">All server's responses will be shown in the table below:</p>
+        </div>
+      </div>
+      <div class="row" id="responses">
+        <div class="col-md-10 col-md-offset-1">
+              <table class="table table-responsive" id="responsesTable">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Response text</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+        </div>
+      </div>
+      <div class="row" id="footer">
+        <div class="col-md-4 col-md-offset-5">
+          <div class="btn btn-primary" align="center" id="resetTable">Reset</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

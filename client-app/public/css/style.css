@@ -1,0 +1,49 @@
+#wrapper {
+  margin-top:70px;
+}
+
+#info > .row > div {
+  margin-top: 30px;
+}
+
+#description {
+  font-size: 1.3em;
+}
+
+#info {
+  margin-bottom: 50px;
+}
+
+#name {
+  margin-top: 15px;
+}
+
+.btn {
+  margin-top: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 1.5em;
+}
+
+#tableTitle {
+  margin: 30px 50px 5px 50px;
+  font-size: 1.3em;
+}
+
+#responses {
+  background-color: white;
+  margin: 0px 50px 5px 50px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  max-height: 500px;
+  overflow:scroll;
+}
+
+#responsesTable {
+  font-size: 1.15em;
+}
+
+.errorRow {
+  background-color: #FFA2A2;
+  border: #FD575B solid 1px;
+}

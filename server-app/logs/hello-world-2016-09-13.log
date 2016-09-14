@@ -1,0 +1,309 @@
+INFO  [2016-09-13 08:21:48,014] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 08:21:50,991] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:00:28,865] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:17:19,637] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:22:31,261] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:23:04,998] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:24:04,906] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:28:19,910] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:28:59,646] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:29:30,079] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:29:43,840] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:29:51,944] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:30:02,699] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:31:11,868] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:32:49,003] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:32:58,594] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:33:13,109] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:33:47,316] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:19,437] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:21,868] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:24,351] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:26,394] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:28,324] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:31,441] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:34,073] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:37,649] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:34:41,117] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:10,175] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:10,653] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:11,040] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:11,373] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:11,765] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:12,469] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:13,215] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:20,286] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:20,443] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:20,630] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:20,836] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:21,054] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:21,431] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:21,801] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:22,210] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:22,795] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:35,181] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:35,436] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:35,657] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:35,883] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:36,090] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:36,281] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:36,742] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:37,124] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:37,460] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:37,818] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:38,213] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:38,651] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:40,091] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:47,149] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:47,552] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:47,951] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:48,299] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:48,629] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:48,990] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:49,322] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:49,639] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:49,927] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:50,284] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:50,694] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:35:51,308] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:07,042] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:07,503] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:07,683] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:07,872] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:08,043] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:08,209] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:08,411] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:08,632] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:08,838] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:09,409] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:09,940] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:36:11,265] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:56,296] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:56,474] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:56,657] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:56,835] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:57,046] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:57,177] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:57,359] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:57,555] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:57,791] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:58,203] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:58,617] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:59,116] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:59,733] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:37:59,971] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:38:00,151] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:38:00,315] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:38:00,477] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:23,131] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:23,349] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:23,521] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:23,700] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:23,880] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:24,084] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:24,298] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:24,706] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:25,067] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:25,387] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:25,803] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:26,333] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:26,877] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:31,301] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:31,767] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:32,095] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 10:39:32,299] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:15,248] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:16,664] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:17,050] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:17,287] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:17,480] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:19,756] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:21,016] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:04:21,221] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:05:24,657] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:50,417] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:51,334] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:53,004] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:53,519] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:53,789] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:54,181] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:28:59,940] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:29:03,363] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:29:03,869] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:29:58,594] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:05,799] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:06,190] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:06,465] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:07,883] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:08,221] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:19,278] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:19,621] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:46,630] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:46,974] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:47,159] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:37:47,329] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:39:25,812] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:39:28,289] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:39:32,137] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:39:32,902] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 11:39:48,959] org.eclipse.jetty.server.AbstractConnector: Stopped application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 11:39:48,989] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 11:39:48,999] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3c904f1e{/,null,UNAVAILABLE}
+INFO  [2016-09-13 11:39:49,017] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@17b64941{/,null,UNAVAILABLE}
+INFO  [2016-09-13 11:50:37,255] org.eclipse.jetty.util.log: Logging initialized @1400ms
+INFO  [2016-09-13 11:50:37,345] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-13 11:50:37,345] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-13 11:50:37,345] com.example.HelloWorldApplication: Start hello-world app
+INFO  [2016-09-13 11:50:37,349] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-13 11:50:37,349] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-13 11:50:37,356] io.dropwizard.server.ServerFactory: Starting HelloWorld
+================================================================================
+
+                              HelloWorld
+
+================================================================================
+
+
+INFO  [2016-09-13 11:50:37,491] org.eclipse.jetty.setuid.SetUIDListener: Opened application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 11:50:37,491] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 11:50:37,492] org.eclipse.jetty.server.Server: jetty-9.3.z-SNAPSHOT
+INFO  [2016-09-13 11:50:37,945] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.resources.HelloWorldResource)
+
+INFO  [2016-09-13 11:50:37,947] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@17b64941{/,null,AVAILABLE}
+INFO  [2016-09-13 11:50:37,951] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2016-09-13 11:50:37,955] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3c904f1e{/,null,AVAILABLE}
+INFO  [2016-09-13 11:50:37,969] org.eclipse.jetty.server.AbstractConnector: Started application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 11:50:37,969] org.eclipse.jetty.server.AbstractConnector: Started admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 11:50:37,970] org.eclipse.jetty.server.Server: Started @2116ms
+INFO  [2016-09-13 12:10:53,236] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:11:56,445] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:12:40,643] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:13:10,026] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:13:48,284] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:15:03,864] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:15:40,681] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:16:43,645] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:17:49,808] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:18:31,178] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:20:08,927] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:20:09,889] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:20:24,202] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:21:06,934] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:21:07,736] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:21:20,782] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:23:41,082] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:23:41,773] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:23:42,236] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:14,999] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:15,605] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:15,955] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:16,168] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:16,364] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:17,354] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:17,575] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:17,778] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:17,991] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:18,522] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:18,905] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:19,311] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:21,103] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:21,773] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:21,976] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:24,759] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:27,507] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:27,953] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:25:28,411] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 12:28:30,679] org.eclipse.jetty.server.AbstractConnector: Stopped application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 12:28:30,680] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 12:28:30,681] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3c904f1e{/,null,UNAVAILABLE}
+INFO  [2016-09-13 12:28:30,684] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@17b64941{/,null,UNAVAILABLE}
+INFO  [2016-09-13 14:02:40,865] org.eclipse.jetty.util.log: Logging initialized @1127ms
+INFO  [2016-09-13 14:02:40,952] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-13 14:02:40,952] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-13 14:02:40,952] com.example.HelloWorldApplication: Start hello-world app
+INFO  [2016-09-13 14:02:40,955] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-13 14:02:40,955] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-13 14:02:40,962] io.dropwizard.server.ServerFactory: Starting HelloWorld
+================================================================================
+
+                              HelloWorld
+
+================================================================================
+
+
+INFO  [2016-09-13 14:02:41,077] org.eclipse.jetty.setuid.SetUIDListener: Opened application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 14:02:41,077] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 14:02:41,081] org.eclipse.jetty.server.Server: jetty-9.3.z-SNAPSHOT
+INFO  [2016-09-13 14:02:41,470] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.resources.HelloWorldResource)
+
+INFO  [2016-09-13 14:02:41,471] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@17b64941{/,null,AVAILABLE}
+INFO  [2016-09-13 14:02:41,475] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2016-09-13 14:02:41,479] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3c904f1e{/,null,AVAILABLE}
+INFO  [2016-09-13 14:02:41,486] org.eclipse.jetty.server.AbstractConnector: Started application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 14:02:41,486] org.eclipse.jetty.server.AbstractConnector: Started admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 14:02:41,487] org.eclipse.jetty.server.Server: Started @1749ms
+INFO  [2016-09-13 14:03:34,869] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:03:36,943] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:03:37,661] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:15,558] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:27,575] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:32,305] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:32,751] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:38,150] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:43,997] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:04:48,010] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 14:45:11,345] org.eclipse.jetty.server.AbstractConnector: Stopped application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 14:45:11,347] org.eclipse.jetty.server.AbstractConnector: Stopped admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 14:45:11,349] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3c904f1e{/,null,UNAVAILABLE}
+INFO  [2016-09-13 14:45:11,353] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@17b64941{/,null,UNAVAILABLE}
+INFO  [2016-09-13 15:48:29,315] org.eclipse.jetty.util.log: Logging initialized @1208ms
+INFO  [2016-09-13 15:48:29,416] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-13 15:48:29,416] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-13 15:48:29,417] com.example.HelloWorldApplication: Start hello-world app
+INFO  [2016-09-13 15:48:29,420] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2016-09-13 15:48:29,420] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2016-09-13 15:48:29,427] io.dropwizard.server.ServerFactory: Starting HelloWorld
+================================================================================
+
+                              HelloWorld
+
+================================================================================
+
+
+INFO  [2016-09-13 15:48:29,552] org.eclipse.jetty.setuid.SetUIDListener: Opened application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 15:48:29,552] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 15:48:29,554] org.eclipse.jetty.server.Server: jetty-9.3.z-SNAPSHOT
+INFO  [2016-09-13 15:48:29,990] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /hello-world (com.example.resources.HelloWorldResource)
+
+INFO  [2016-09-13 15:48:29,991] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@17b64941{/,null,AVAILABLE}
+INFO  [2016-09-13 15:48:29,994] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2016-09-13 15:48:29,998] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3c904f1e{/,null,AVAILABLE}
+INFO  [2016-09-13 15:48:30,007] org.eclipse.jetty.server.AbstractConnector: Started application@78aea4b9{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+INFO  [2016-09-13 15:48:30,007] org.eclipse.jetty.server.AbstractConnector: Started admin@2a65bb85{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+INFO  [2016-09-13 15:48:30,008] org.eclipse.jetty.server.Server: Started @1901ms
+INFO  [2016-09-13 15:48:44,893] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 15:48:56,761] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 16:30:47,136] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 16:30:50,813] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 16:31:08,655] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 16:31:09,435] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 16:31:09,902] com.example.resources.HelloWorldResource: GET /hello-world
+INFO  [2016-09-13 16:31:26,021] com.example.resources.HelloWorldResource: GET /hello-world

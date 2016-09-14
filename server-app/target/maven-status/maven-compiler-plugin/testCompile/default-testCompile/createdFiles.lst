@@ -1,0 +1,4 @@
+com/example/HelloWorldIntegrationTest.class
+com/example/resources/HelloWorldEndpointTest.class
+com/example/api/SayingTest.class
+com/example/resources/HelloWorldResourceTest.class

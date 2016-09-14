@@ -1,0 +1,14 @@
+{
+  "name": "first-node-js",
+  "version": "1.0.0",
+  "description": "Simple client web application",
+  "main": "client.js",
+  "scripts": {
+    "start": "node client.js"
+  },
+  "author": "Ann S",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

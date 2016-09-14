@@ -1,0 +1,5 @@
+com/example/health/TemplateHealthCheck.class
+com/example/api/Saying.class
+com/example/resources/HelloWorldResource.class
+com/example/HelloWorldApplication.class
+com/example/HelloWorldConfiguration.class

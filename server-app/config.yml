@@ -1,0 +1,23 @@
+template: Hello, %s!
+defaultName: world
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: logs/hello-world.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: logs/hello-world-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+  loggers:
+    com.example: DEBUG
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
