@@ -4,11 +4,16 @@
   "description": "Simple client web application",
   "main": "client.js",
   "scripts": {
-    "start": "node client.js"
+    "start": "node client.js",
+    "test": "mocha"
   },
   "author": "Ann S",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mocha": "^3.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }
