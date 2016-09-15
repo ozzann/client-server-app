@@ -14,6 +14,13 @@ class production {
         owner => 'vagrant',
     }
 
+     exec {'build_client_image':
+        require => File['/home/vagrant/client-app'],
+        cwd => "/home/vagrant/client-app",
+        command => "/bin/bash -c 'docker build -t client-app .'",
+        timeout => 500,
+    }
+
     exec {'rm -rf /home/vagrant/server-app/*':
         path => '/usr/bin:/usr/sbin:/bin',
     }
@@ -24,18 +31,27 @@ class production {
         recurse => 'remote',
         path => '/home/vagrant/server-app',
         owner => 'vagrant',
-        require => File['/home/vagrant/client-app'],
+        require => Exec['build_client_image'],
+    }
+
+    exec {'build_server_image':
+        require => File['/home/vagrant/server-app'],
+        cwd => "/home/vagrant/server-app",
+        command => "/bin/bash -c 'docker build -t server-app .'",
+        timeout => 3000,
     }
 
     file { '/home/vagrant/docker-compose.yml':
         ensure => 'present',
         source => 'puppet:///extra_files/docker-compose.yml',
         owner => 'vagrant',
-        require => File['/home/vagrant/server-app'],
+        require => Exec['build_server_image'],
     }
 
-    docker_compose { '/home/vagrant/docker-compose.yml':
-        ensure => present,
+
+    exec { 'docker_compose':
+        command => "/bin/bash -c 'docker-compose up -d'",
+        cwd => "/home/vagrant",
+        timeout => 500,
         require => File['/home/vagrant/docker-compose.yml'],
     }
-}
