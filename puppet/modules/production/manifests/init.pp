@@ -49,11 +49,12 @@ class production {
     }
 
 
-    exec { 'docker_compose':
-        command => "/bin/bash -c 'docker-compose up -d'",
-        cwd => "/home/vagrant",
-        timeout => 500,
-        require => File['/home/vagrant/docker-compose.yml'],
+    class {'docker::compose':
+      ensure => present,
+    }
+
+    docker_compose {'/home/vagrant/docker-compose.yml':
+      ensure => present,
     }
 
 }
