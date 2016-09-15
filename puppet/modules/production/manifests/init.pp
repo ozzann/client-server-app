@@ -55,3 +55,5 @@ class production {
         timeout => 500,
         require => File['/home/vagrant/docker-compose.yml'],
     }
+
+}
