@@ -1,0 +1,64 @@
+#!/bin/bash
+
+
+sudo service network-manager stop
+sudo ifdown eth1
+sudo ifup eth1
+sudo service network-manager start
+
+
+if ps aux | grep "puppet master" | grep -v grep 2> /dev/null
+then
+    echo "Puppet Master is already installed. Exiting..."
+else
+    # Install Puppet Master
+    wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb 
+    sudo dpkg -i puppetlabs-release-trusty.deb 
+    sudo apt-get update -yq && sudo apt-get upgrade -yq 
+    sudo apt-get install -yq puppetmaster
+
+    # Configure /etc/hosts file
+    echo "" | sudo tee --append /etc/hosts 2> /dev/null 
+    echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append /etc/hosts 2> /dev/null 
+
+    # Install jq to parse nodes json file
+    sudo apt-get install -y jq
+
+    sudo cp /vagrant/nodes.json nodes.json
+
+    length=$(jq <"nodes.json" '.nodes["puppet.vm"][":links"] | length')
+
+    for (( i=0; i<$length; i++ ))
+    do
+
+        ip=$(jq <"nodes.json" --arg index $i '.nodes["puppet.vm"][":links"][$index|tonumber][":ip"]')
+
+        hostname=$(jq <"nodes.json" --arg index $i '.nodes["puppet.vm"][":links"][$index|tonumber][":hostname"]')
+    
+        host=$(echo "$ip $hostname" | sed 's/"//g')
+
+        sudo echo "$host" >> /etc/hosts
+    done
+    
+    sudo sed -i 's/127\.0\.0\.1.*/&\tpuppet.vm/' /etc/hosts
+ 
+    # Add optional alternate DNS names and certname to /etc/puppet/puppet.conf
+    sudo sed -i 's/.*\[main\].*/&\ndns_alt_names = puppet,puppet.vm\ncertname=puppet.vm/' /etc/puppet/puppet.conf
+    sudo sed -i 's/^templatedir=.*//' /etc/puppet/puppet.conf
+ 
+    # Install some initial puppet modules on Puppet Master server
+    sudo puppet module install puppetlabs-ntp
+    sudo puppet module install garethr-docker
+    sudo puppet module install puppetlabs-vcsrepo
+
+    # Create a static mount point
+    sudo sed -i 's/#\s*\[extra_files\]/\[extra_files\]/' /etc/puppet/fileserver.conf 
+    sudo sed -i 's/#\s*path \/etc\/puppet\/files/path \/etc\/puppet\/files/' /etc/puppet/fileserver.conf 
+    sudo sed -i 's/#\s*allow \*/allow \*/' /etc/puppet/fileserver.conf 
+
+    sudo mkdir /etc/puppet/files
+
+    sudo usermod -a -G puppet vagrant
+    sudo chgrp puppet -R /etc/puppet
+    sudo chmod g+w -R /etc/puppet 
+fi
