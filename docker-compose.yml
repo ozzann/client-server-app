@@ -11,7 +11,7 @@ services:
         - app_net
 
   server:
-      build: ./dropwizard
+      build: ./server-app
       expose:
         - 8080
         - 8081
