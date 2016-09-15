@@ -24,15 +24,18 @@ class production {
         recurse => 'remote',
         path => '/home/vagrant/server-app',
         owner => 'vagrant',
+        require => File['/home/vagrant/client-app'],
     }
 
     file { '/home/vagrant/docker-compose.yml':
         ensure => 'present',
         source => 'puppet:///extra_files/docker-compose.yml',
         owner => 'vagrant',
+        require => File['/home/vagrant/server-app'],
     }
 
     docker_compose { '/home/vagrant/docker-compose.yml':
         ensure => present,
+        require => File['/home/vagrant/docker-compose.yml'],
     }
 }
