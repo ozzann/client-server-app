@@ -51,10 +51,15 @@ else
     sudo apt-get -y install jenkins
 fi
 
+
+# Setting Jenkins config
+echo "Setting Jenkins config ..................................................................... "
+#sudo wget -O /var/lib/jenkins/config.xml https://raw.github.com/ozzann/my-vagrant/master/jenkins/config.xml
+sudo cp /vagrant/jenkins/config.xml /var/lib/jenkins/config.xml
+
 JENKINSVERSION=$(cat /var/lib/jenkins/config.xml | grep version\>.*\<\/version | grep -o [0-9\.]*)
 echo $JENKINSVERSION >> /var/lib/jenkins/jenkins.install.UpgradeWizard.state
 
-restart_jenkins
 
 # Download jenkins command line tool
 sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
