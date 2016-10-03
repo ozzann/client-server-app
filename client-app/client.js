@@ -12,6 +12,8 @@ app.get("/",function(req,res){
 app.get("/hello", function(req, res){
   var path = '/hello-world';
 
+console.log("Hello!");
+
   sayHelloToServer(res, path);
 });
 
@@ -23,38 +25,34 @@ app.get("/hello/:name", function(req, res){
   sayHelloToServer(res, path);
 });
 
-function sayHelloToServer(res, path){
-  var http = require('http');
 
+function sayHelloToServer(res, path){
+
+  var request = require("request");
+
+  var fullUrl = 'http://172.18.0.22:8080' + path;
   var options = {
-      host: '172.18.0.22',
-      port: 8080,
-      path: path,
-      headers: {
-          'Content-Type': 'application/json'
-      }
+    url: fullUrl,
+    timeout: 500,
+    headers: {
+      'Content-Type': 'application/json'
+    }
   };
 
-  var callback = function(response){
-     var body = '';
-     response.on('data', function(data) {
-        body += data;
-     });
-
-     response.on('end', function() {
-        res.send(body);
-     });
-
+  function callback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var jsonBody = JSON.parse(body);
+      res.send(jsonBody);
+    }
   }
 
-  var request = http.request(options, callback);
-  request.on('error', function() {
-  });
 
-  request.end();
+  request(options, callback);
 }
 
 
 app.listen(3000, function(){
   console.log("Live at Port 3000");
 });
+
+module.exports.getApp = app;

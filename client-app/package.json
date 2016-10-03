@@ -1,19 +1,25 @@
 {
-  "name": "first-node-js",
+  "name": "client-app",
   "version": "1.0.0",
   "description": "Simple client web application",
   "main": "client.js",
   "scripts": {
     "start": "node client.js",
-    "test": "mocha"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "Ann S",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "request": "^2.65.0",
+    "supertest": "^2.0.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "nock": "^2.17.0",
+    "request": "^2.65.0",
+    "supertest": "^2.0.0"
   }
 }
