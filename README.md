@@ -1,5 +1,4 @@
-## The client-server application as a demonstrator of using wide stack of technologies
-
+## The client-server application demonstrating wide stack of technologies for CI and CD
 
 This repo contains two applications written in different languages and the pipeline for their deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The goal of this project is to demonstrate advantages of every of these tools. As an example, simple client-server application is considered.
 
@@ -98,8 +97,43 @@ Because it's a Node.js application, it requires using npm commands in its Docker
 
 Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
+Network issues to be implemented ....
 
 ## Jenkins builds
+
+Jenkins is a powerful tool for Continuous Integration. It allows you run tests almost immediately after commiting changes. Moreover, Jenkins has just a huge set of different plugins for any purpose.
+
+In this case Jenkins is bound to GitHub repository by using just one plugin called **GitHub Plugin**.
+
+There are two ways to detect commits and then run builds: polling SCM or set GitHub webhook so after every commit Jenkins build could run immediately. In our case polling SCM is chosen, it's scheduled to poll the GitHub repo every 5 minutes:
+
+		H/5 * * * *
+        
+### Pipeline
+
+While standard Jenkins "freestyle" jobs support simple continuous integration by allowing you to define sequential tasks in an application lifecycle, they do not create a record of execution that persists through any planned or unplanned restarts, enable one script to address all the steps in a complex workflow, or confer the other advantages of pipelines.
+
+In contrast to freestyle jobs, pipelines enable you to define the whole application lifecycle. Pipeline functionality helps Jenkins to support continuous delivery (CD). The Pipeline plugin was built with requirements for a flexible, extensible, and script-based CD workflow capability in mind.
+
+The plugin which Jenkins instance has to have in order to build pipelins is [Pipeline plugin](https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Plugin).
+
+Pipelines are built with simple text scripts that use a Pipeline DSL (domain-specific language) based on the Groovy programming language. !!!!! To be implemented.... Some words about stages......
+
+There are few ways of creating Jenkins pipelines. In this example I'm using the one where a script entered in the configuration page of the web interface for your Jenkins instance. This script is a quite simple. It defines few logical stages:
+
+- **Checkout**
+At this step all source code is retrieving from GitHub repository:
+
+		  git url: 'https://github.com/ozzann/client-server-app.git'
+
+- **Build the server application**
+At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
+
+- **Build the client application**
+At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
+
+For the previous two stages script to run tests **run_tests.sh** has similar structure:
+
 
 
 ## Puppet management
