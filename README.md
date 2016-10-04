@@ -54,12 +54,22 @@ Both of them respond with JSON in this format:
 		
     	{"id":24;"content":"Hello, Anna!"}
         
-where **id** field is the number of request, the **content** is just greeting. By default when a name is not defined it is the following: "Hello, world!".
+where **id** field is the number of request, the **content** is just greeting. By default when a name is not defined the server responds with this content: "Hello, world!".
 
 
 
 ### Dockerfile
 
+The Dockerfile for the server app is quite simple. It's based on java-8 image. Then it just copies files of the app in a corresponding directory, exposes ports and runs the app with a single command. Here is a snippet demonstrating how it looks like put all together:
+
+		FROM java:8
+
+        COPY . /usr/src/server-app
+        WORKDIR /usr/src/server-app
+
+        EXPOSE 8080 8081
+
+        CMD java -jar hello-world-1.0.0.jar server config.yml 
 
 
 
@@ -88,7 +98,9 @@ Because it's a Node.js application, it requires using npm commands in its Docker
 
 Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
+
 ## Jenkins builds
+
 
 ## Puppet management
 
