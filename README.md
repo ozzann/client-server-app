@@ -153,7 +153,7 @@ The last stage is responsible for deployment to the Puppet Master virtual machin
 
 This set of bash commands copies all required files to puppet master. In order to store app's file and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
 
-![]({{site.baseurl}}/images/pipeline.png)
+![]({{site.baseurl}}/client-server-app/images/pipeline.png)
 
 ## Puppet management
 
