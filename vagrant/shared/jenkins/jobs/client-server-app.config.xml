@@ -1,9 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<flow-definition plugin="workflow-job@2.6">
+<flow-definition plugin="workflow-job@2.7">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers>
         <hudson.triggers.SCMTrigger>
@@ -13,26 +17,24 @@
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.15">
-    <script>node{
-    
-    stage(&apos;Checkout&apos;) {
-        git url: &apos;https://github.com/ozzann/client-server-app.git&apos;
-    }
-    
-    stage(&apos;Build server app&apos;) {
-      sh &quot;cd server-app; ./run_tests.sh&quot;
-    }
-    
-    stage(&apos;Build client app&apos;) {
-      sh &quot;cd client-app; ./run_tests.sh&quot;
-    }
-    
-    stage(&apos;Deploy&apos;) {
-        sh &apos;&apos;&apos;sshpass -p vagrant scp -r client-app/ vagrant@192.168.56.115:/etc/puppet/files/; sshpass -p vagrant scp -r server-app/ vagrant@192.168.56.115:/etc/puppet/files/; sshpass -p vagrant scp puppet/manifests/site.pp vagrant@192.168.56.115:/etc/puppet/manifests; sshpass -p vagrant scp -r puppet/modules/ vagrant@192.168.56.115:/etc/puppet; sshpass -p vagrant scp docker-compose.yml vagrant@192.168.56.115:/etc/puppet/files&apos;&apos;&apos;
-    }
-}</script>
-    <sandbox>true</sandbox>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.18">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@3.0.0">
+      <configVersion>2</configVersion>
+      <userRemoteConfigs>
+        <hudson.plugins.git.UserRemoteConfig>
+          <url>https://github.com/ozzann/client-server-app</url>
+        </hudson.plugins.git.UserRemoteConfig>
+      </userRemoteConfigs>
+      <branches>
+        <hudson.plugins.git.BranchSpec>
+          <name>*/master</name>
+        </hudson.plugins.git.BranchSpec>
+      </branches>
+      <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+      <submoduleCfg class="list"/>
+      <extensions/>
+    </scm>
+    <scriptPath>Jenkinsfile</scriptPath>
   </definition>
   <triggers/>
 </flow-definition>
