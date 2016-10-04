@@ -132,7 +132,27 @@ At this stage Jenkins just executes bash script which contains all required inst
 - **Build the client application**
 At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
-For the previous two stages script to run tests **run_tests.sh** has similar structure:
+For the previous two stages script to run tests **run_tests.sh** has similar structure. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
+
+In the case of the client application it's:
+
+		CMD ["npm","test"]
+        
+In the case of the server app it's:
+
+		CMD mvn test
+        
+        
+- **Deploy stage**
+The last stage is responsible for deployment to the Puppet Master virtual machine. It does so by this command:
+
+	sh "sshpass -p vagrant rsync -r client-app/ vagrant@puppet.vm:/etc/puppet/files/client-app; 
+    sshpass -p vagrant rsync -r server-app/ vagrant@puppet.vm:/etc/puppet/files/server-app; 	 	 sshpass -p vagrant rsync puppet/manifests/site.pp vagrant@puppet.vm:/etc/puppet/manifests; 
+    sshpass -p vagrant rsync -r puppet/modules/ vagrant@puppet.vm:/etc/puppet; 
+    sshpass -p vagrant rsync docker-compose.yml vagrant@puppet.vm:/etc/puppet/files"
+
+This set of bash commands copy all required files to puppet master. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
+
 
 
 
