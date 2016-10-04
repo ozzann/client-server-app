@@ -6,12 +6,16 @@ sudo ifup eth1
 sudo service network-manager start
 
 
-restart_jenkins(){
-    sudo /etc/init.d/jenkins restart
-
+wait_till_jenkins_is_ready(){
     while [[ $(curl -s -w "%{http_code}"  http://localhost:8080 -o /dev/null) != "200" ]]; do
        sleep 1
     done
+}
+
+restart_jenkins(){
+    sudo /etc/init.d/jenkins restart
+
+    wait_till_jenkins_is_ready
 }
 
 plugin_dir=/var/lib/jenkins/plugins
@@ -61,6 +65,8 @@ JENKINSVERSION=$(cat /var/lib/jenkins/config.xml | grep version\>.*\<\/version |
 echo $JENKINSVERSION >> /var/lib/jenkins/jenkins.install.UpgradeWizard.state
 
 
+wait_till_jenkins_is_ready
+
 # Download jenkins command line tool
 sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 
@@ -72,6 +78,7 @@ restart_jenkins
 echo "Installing Jenkins plugins and its dependencies ........................................ "
 
 install_plugin "git"
+install_plugin "workflow-aggregator"
 
 changed=1
 
@@ -97,7 +104,7 @@ sudo cp /vagrant/jenkins/github-plugin-configuration.xml /var/lib/jenkins/github
 # Configure Jenkins jobs:
 echo "Creating Jenkins jobs............................................................................"
 
-sudo cp /vagrant/jenkins/jobs/clien-server-app.config.xml client-server-app.config.xml
+sudo cp /vagrant/jenkins/jobs/client-server-app.config.xml client-server-app.config.xml
 sudo java -jar jenkins-cli.jar -s http://localhost:8080/ create-job client-server-app < client-server-app.config.xml
 
 # Adding jenkins user to docker group
