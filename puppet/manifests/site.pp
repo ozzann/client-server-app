@@ -1,6 +1,6 @@
 node default {
 }
 
-node 'java.production.vm' {
+node 'production.vm' {
     include production
 }

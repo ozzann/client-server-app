@@ -76,7 +76,30 @@ The Dockerfile for the server app is quite simple. It's based on java-8 image. T
 
 ### Overview
 
-Client application is quite a simple one-page Node.js application. It just simply pings a server on demand and shows a ping log. The web-interface is written with Bootstrap framework.
+Client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to ping the server.
+Node.js provides many very useful frameworks and modules which significantly simplify the process of development. In this the following list of frameworks is used:
+
+- **Express framework** makes the client listening to a 3000 port
+- **Request module** simplifies HTTP requests. Here is just one GET request to the server.
+- **Nock module** is a nice tool for testing HTTP requests. It allows us to mock some requests which we can't send directly while testing. For instance, it's not possible to send direct request to our server because it may not be available, so nock can mock this request with any desirable response, like so:
+
+        nock("http://172.18.0.22:8080")
+          .defaultReplyHeaders({
+              'Content-Type': 'application/json'
+            })
+            .get('/hello-world')
+            .reply(200, {
+              "id": 1,
+              "content": "Hello, world!"
+            });
+        
+- **Supertest module** provides a high-level abstraction for testing HTTP
+- **Chai** is a BDD/TDD assertion library
+- **Mocha** is a JavaScript testing framework
+
+Web-interface is build with Bootstrap framework.
+
+
 
 ### Dockerfile
 
@@ -97,7 +120,25 @@ Because it's a Node.js application, it requires using npm commands in its Docker
 
 Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
-Network issues to be implemented ....
+There are two services describe in the docker-compose file: for the server app's and client's builds. Also the information about exposing ports is included. Because the server has to be assigned with static IP address, there has to be a network which also describe in the docker-compose configuration.
+
+With this instruction the network **app_net** is created:
+
+    networks:
+        app_net:
+            ipam:
+                config:
+                -  subnet: "172.18.0.0/16"
+
+Then the choosen IP addres is assigned for the server:
+
+    server:
+          ...
+          networks:
+            app_net:
+              ipv4_address: 172.18.0.22
+
+
 
 ## Jenkins builds
 
@@ -127,34 +168,103 @@ At this step all source code is retrieving from GitHub repository:
 		  git url: 'https://github.com/ozzann/client-server-app.git'
 
 - **Build the server application**
+
 At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
 - **Build the client application**
-At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
-For the previous two stages script to run tests **run_tests.sh** has similar structure. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
+	At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
-In the case of the client application it's:
+	For the previous two stages script to run tests **run_tests.sh** has similar structure. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
+
+	In the case of the client application it's:
 
 		CMD ["npm","test"]
         
-In the case of the server app it's:
+	In the case of the server app it's:
 
 		CMD mvn test
         
         
-- **Deploy stage**
-The last stage is responsible for deployment to the Puppet Master virtual machine. It does so by this command:
+- **Deployment stage**
 
-	sh "sshpass -p vagrant rsync -r client-app/ vagrant@puppet.vm:/etc/puppet/files/client-app; 
-    sshpass -p vagrant rsync -r server-app/ vagrant@puppet.vm:/etc/puppet/files/server-app; 	 	 sshpass -p vagrant rsync puppet/manifests/site.pp vagrant@puppet.vm:/etc/puppet/manifests; 
-    sshpass -p vagrant rsync -r puppet/modules/ vagrant@puppet.vm:/etc/puppet; 
-    sshpass -p vagrant rsync docker-compose.yml vagrant@puppet.vm:/etc/puppet/files"
+	The last stage is responsible for deployment to the Puppet Master virtual machine. It does so by this command:
 
-This set of bash commands copies all required files to puppet master. In order to store app's file and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
+        sh "sshpass -p vagrant rsync -r client-app/ vagrant@puppet.vm:/etc/puppet/files/client-app; 
+        sshpass -p vagrant rsync -r server-app/ vagrant@puppet.vm:/etc/puppet/files/server-app; 	 	   sshpass -p vagrant rsync puppet/manifests/site.pp vagrant@puppet.vm:/etc/puppet/manifests; 
+        sshpass -p vagrant rsync -r puppet/modules/ vagrant@puppet.vm:/etc/puppet; 
+        sshpass -p vagrant rsync docker-compose.yml vagrant@puppet.vm:/etc/puppet/files"
+
+	This set of bash commands copies all required files to puppet master. In order to store app's file and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
 
 ![]({{site.baseurl}}/client-server-app/images/pipeline.png)
 
+
 ## Puppet management
 
-## Vagrant 
+With Puppet, you can define the state of an IT infrastructure, and Puppet automatically enforces the desired state. Puppet automates every step of the software delivery process, from provisioning of physical and virtual machines to orchestration and reporting; from early-stage code development through testing, production release and updates.
+
+In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production and after that it runs a deployment script.
+
+In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for client and server apps are sent to **client-app** and server-app directpries correspondongly by using rsync command in Jenkins pipeline.
+
+Besdies copying files, Puppet Master has to run both of the applications using docker-compose. The docker-compose typr to run Compose is already included in the docker module and we have to make sure the docker-compose utility is installed:
+
+	class {'docker::compose':
+      ensure => present,
+    }
+
+And then only define a docker_compose resource pointing at the Compose file:
+
+    docker_compose {'/home/vagrant/docker-compose.yml':
+      ensure => present,
+    }
+
+
+
+## Vagrant
+
+Firstly Vagrant creates three virtual machines. The information about machines' names, IPs and provisioning scripts is stored in JSON file nodes.json.
+
+All of them are based on Ubuntu 14.04 Desktop and have descriptive names. Also, each of them is assigned with specific IP address, because they need to communicate between each other. This is obviously not enought to build VMs required fot the pipeline, so Vagrant allows us to install any packages and configure a system by using provisioners. Each of the machines has a different configuration: Jenkins VM has significant differences, whilst puppet VMs just slightly differ from each other.
+
+- **puppet.vm** has IP address 192.168.56.110 
+
+The provisioning script bootstrap-puppet-master.sh installs puppetmaster to this machine. Beside that it also configures **/etc/hosts** file by adding information about puppet master and puppet agent hosts. Also, some puppet modules, such as ntp, docker and vcsrepo, are installed.
+
+Because puppet master sends application's files to puppet agent, a static mount point **/etc/puppet/files** is configured. It is managed in another puppet config file **/etc/puppet/fileserver.conf**.
+
+In order not to hardcode Puppet Master's and Puppet Agent's IPs, the description of the Puppet Master in nodes.json contains a reference to Puppet Agent.
+
+- **production.vm** has IP address 192.168.56.111
+
+The provisioning script **bootstrap-production.sh** for Production VM performs three tasks. Firstly, it installs puppet agent. Then it configures **/etc/hosts** file by adding information about Puppet Master host. Also it makes puppet config **/etc/puppet/puppet.conf** aware of the Puppet Master by adding server and certname parameters. After that **/etc/puppet/puppet.conf** should contain:
+
+	server=puppet.vm
+	certname=production.vm
+    
+In order not to hardcode Puppet Master's and Puppet Agent's IPs, the description of the Production puppet node in **nodes.json** contains a reference to Puppet Master.
+
+- **jenkins.vm** has IP address 192.168.56.112
+
+Jenkins VM uses not only shell, but also docker and file provisioning. Vagrant automatically installs Docker and pulls required docker java-8 and node images:
+
+	nodeconfig.vm.provision "docker", images: ["java:8", "node"]
+    
+
+Jenkins VM has **bootstrap-jenkins.sh** provisioning script. Firstly, this script installs git. Second step is to install Jenkins. The script uses files from shared folder, particularly Jenkins global config file, config files for each of the jobs and the file containing list of all required plugins and its dependencies. In order to create all jobs and install all neccessray plugins, Jenkins command line tool **jenkins-cli.jar** is used, like this:
+
+	sudo java -jar jenkins-cli.jar -s http://localhost:8080/ create-job client-server-app < client-server-app.config.xml
+    
+    
+ But before creating Jenkins jobs, file jenkins-cli.jar should be preliminary downloaded from http://localhost:8080
+ 
+ 	sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+    
+ Also essntail Jenkins plugins should be installed. In this case we're using only two of them (but not forget about dependencies): **Git Plugin** and **Pipeline Plugin**. For this purpose I'm using very useful [script of github user micw](https://gist.github.com/micw/e80d739c6099078ce0f3).
+ At the very last stage sshpass is installed. It's required by pipeline Jenkinfile to send all neccessary file to Puppet Master VM:
+ 
+ 		sudo apt-get -yq update
+		sudo apt-get install -yq sshpass
+
+
