@@ -97,7 +97,7 @@ Node.js provides many very useful frameworks and modules which significantly sim
 - **Chai** is a BDD/TDD assertion library
 - **Mocha** is a JavaScript testing framework
 
-
+Web-interface is build with Bootstrap framework.
 
 
 
@@ -190,10 +190,10 @@ At this stage Jenkins just executes bash script which contains all required inst
 
 	The last stage is responsible for deployment to the Puppet Master virtual machine. It does so by this command:
 
-      sh "sshpass -p vagrant rsync -r client-app/ vagrant@puppet.vm:/etc/puppet/files/client-app; 
-      sshpass -p vagrant rsync -r server-app/ vagrant@puppet.vm:/etc/puppet/files/server-app; 	 	   sshpass -p vagrant rsync puppet/manifests/site.pp vagrant@puppet.vm:/etc/puppet/manifests; 
-      sshpass -p vagrant rsync -r puppet/modules/ vagrant@puppet.vm:/etc/puppet; 
-      sshpass -p vagrant rsync docker-compose.yml vagrant@puppet.vm:/etc/puppet/files"
+        sh "sshpass -p vagrant rsync -r client-app/ vagrant@puppet.vm:/etc/puppet/files/client-app; 
+        sshpass -p vagrant rsync -r server-app/ vagrant@puppet.vm:/etc/puppet/files/server-app; 	 	   sshpass -p vagrant rsync puppet/manifests/site.pp vagrant@puppet.vm:/etc/puppet/manifests; 
+        sshpass -p vagrant rsync -r puppet/modules/ vagrant@puppet.vm:/etc/puppet; 
+        sshpass -p vagrant rsync docker-compose.yml vagrant@puppet.vm:/etc/puppet/files"
 
 	This set of bash commands copies all required files to puppet master. In order to store app's file and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
 
@@ -223,3 +223,48 @@ And then only define a docker_compose resource pointing at the Compose file:
 
 
 ## Vagrant
+
+Firstly Vagrant creates three virtual machines. The information about machines' names, IPs and provisioning scripts is stored in JSON file nodes.json.
+
+All of them are based on Ubuntu 14.04 Desktop and have descriptive names. Also, each of them is assigned with specific IP address, because they need to communicate between each other. This is obviously not enought to build VMs required fot the pipeline, so Vagrant allows us to install any packages and configure a system by using provisioners. Each of the machines has a different configuration: Jenkins VM has significant differences, whilst puppet VMs just slightly differ from each other.
+
+- **puppet.vm** has IP address 192.168.56.110 
+
+The provisioning script bootstrap-puppet-master.sh installs puppetmaster to this machine. Beside that it also configures **/etc/hosts** file by adding information about puppet master and puppet agent hosts. Also, some puppet modules, such as ntp, docker and vcsrepo, are installed.
+
+Because puppet master sends application's files to puppet agent, a static mount point **/etc/puppet/files** is configured. It is managed in another puppet config file **/etc/puppet/fileserver.conf**.
+
+In order not to hardcode Puppet Master's and Puppet Agent's IPs, the description of the Puppet Master in nodes.json contains a reference to Puppet Agent.
+
+- **production.vm** has IP address 192.168.56.111
+
+The provisioning script **bootstrap-production.sh** for Production VM performs three tasks. Firstly, it installs puppet agent. Then it configures **/etc/hosts** file by adding information about Puppet Master host. Also it makes puppet config **/etc/puppet/puppet.conf** aware of the Puppet Master by adding server and certname parameters. After that **/etc/puppet/puppet.conf** should contain:
+
+	server=puppet.vm
+	certname=production.vm
+    
+In order not to hardcode Puppet Master's and Puppet Agent's IPs, the description of the Production puppet node in **nodes.json** contains a reference to Puppet Master.
+
+- **jenkins.vm** has IP address 192.168.56.112
+
+Jenkins VM uses not only shell, but also docker and file provisioning. Vagrant automatically installs Docker and pulls required docker java-8 and node images:
+
+	nodeconfig.vm.provision "docker", images: ["java:8", "node"]
+    
+
+Jenkins VM has **bootstrap-jenkins.sh** provisioning script. Firstly, this script installs git. Second step is to install Jenkins. The script uses files from shared folder, particularly Jenkins global config file, config files for each of the jobs and the file containing list of all required plugins and its dependencies. In order to create all jobs and install all neccessray plugins, Jenkins command line tool **jenkins-cli.jar** is used, like this:
+
+	sudo java -jar jenkins-cli.jar -s http://localhost:8080/ create-job client-server-app < client-server-app.config.xml
+    
+    
+ But before creating Jenkins jobs, file jenkins-cli.jar should be preliminary downloaded from http://localhost:8080
+ 
+ 	sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+    
+ Also essntail Jenkins plugins should be installed. In this case we're using only two of them (but not forget about dependencies): **Git Plugin** and **Pipeline Plugin**. For this purpose I'm using very useful [script of github user micw](https://gist.github.com/micw/e80d739c6099078ce0f3).
+ At the very last stage sshpass is installed. It's required by pipeline Jenkinfile to send all neccessary file to Puppet Master VM:
+ 
+ 		sudo apt-get -yq update
+		sudo apt-get install -yq sshpass
+
+
