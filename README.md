@@ -35,14 +35,22 @@ Then after all VMs had successfully set up, you have to build Jenkins **client-s
 - run agent to apply puppet manifests at **production.vm**:
 
 		sudo puppet agent -t
+        
 
 ## Server application
 
 
+
+
 ## Client application
+
+Client application is quite a simple one-page Node.js application. It just simply pings a server on demand and shows a ping log. The web-interface is written with Bootstrap framework.
+
 
 
 ## Docker-compose as a glue
+
+Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run several applications. 
 
 ## Jenkins builds
 
