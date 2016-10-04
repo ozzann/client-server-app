@@ -36,21 +36,57 @@ Then after all VMs had successfully set up, you have to build Jenkins **client-s
 
 		sudo puppet agent -t
         
+        
+After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm**. The client app web-page is presented there, so you can check if the server's running at this page.
+
+
 
 ## Server application
+
+### Overview
+
+Server application is a Java application. It was created with very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. In this case the most important are libraries for REST API, HTTP server and JSON features. As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
+
+		GET /hello-world 
+    	GET /hello-world?name=Anna
+
+Both of them respond with JSON in this format:
+		
+    	{"id":24;"content":"Hello, Anna!"}
+        
+where **id** field is the number of request, the **content** is just greeting. By default when a name is not defined it is the following: "Hello, world!".
+
+
+
+### Dockerfile
 
 
 
 
 ## Client application
 
+### Overview
+
 Client application is quite a simple one-page Node.js application. It just simply pings a server on demand and shows a ping log. The web-interface is written with Bootstrap framework.
+
+### Dockerfile
+
+Because it's a Node.js application, it requires using npm commands in its Dockerfile. Therefore the base image is node image. The application is running on 3000 port, that's why it's exposing in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+
+    	FROM node:4-onbuild
+
+    	ADD . /usr/src/app
+    	RUN npm install  
+
+    	EXPOSE 3000
+
+    	CMD ["node","client.js"] 
 
 
 
 ## Docker-compose as a glue
 
-Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run several applications. 
+Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
 ## Jenkins builds
 
