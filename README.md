@@ -151,9 +151,9 @@ The last stage is responsible for deployment to the Puppet Master virtual machin
     sshpass -p vagrant rsync -r puppet/modules/ vagrant@puppet.vm:/etc/puppet; 
     sshpass -p vagrant rsync docker-compose.yml vagrant@puppet.vm:/etc/puppet/files"
 
-This set of bash commands copy all required files to puppet master. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
+This set of bash commands copies all required files to puppet master. In order to store app's file and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Firstly, it copies applications' files to the special puppet directory **/etc/puppet/files**. Then it copies puppet manifests which allow it to manage production VM. And finally, it sends docker-compose configuration file to the puppet master.
 
-![]({{site.baseurl}}/https://github.com/ozzann/client-server-app/blob/master/images/pipeline.png)
+![]({{site.baseurl}}/images/pipeline.png)
 
 ## Puppet management
 
