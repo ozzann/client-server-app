@@ -1,0 +1,22 @@
+0000000000000000000000000000000000000000 7697919f7046d531a56e5e983964843fa7a894b1 Anna Slastnikova <anna.slastnikova@gmail.com> 1473863421 +0100	commit (initial): first commit
+7697919f7046d531a56e5e983964843fa7a894b1 3a806757509260f5175942833dfd81cbcbaec732 Anna Slastnikova <anna.slastnikova@gmail.com> 1473863591 +0100	commit: add docker-compose file
+3a806757509260f5175942833dfd81cbcbaec732 009c3f849fb7c1c9163b30dc14b9dfdc1f309980 Anna Slastnikova <anna.slastnikova@gmail.com> 1473866518 +0100	commit: 1) first puppet; 2) add client and server apps code
+009c3f849fb7c1c9163b30dc14b9dfdc1f309980 0d37064f8ceea29eb692fa47589c87430aabf07f Anna Slastnikova <anna.slastnikova@gmail.com> 1473866915 +0100	commit: add puppet folder
+0d37064f8ceea29eb692fa47589c87430aabf07f bb56f0d63bd7c5f04dec6e58608032543d277372 Anna Slastnikova <anna.slastnikova@gmail.com> 1473941908 +0100	commit: fix puppet; rm target dir
+bb56f0d63bd7c5f04dec6e58608032543d277372 10e2cd9db14f54724dc6529629c667b7b5ff9799 Anna Slastnikova <anna.slastnikova@gmail.com> 1473942213 +0100	commit: fix docker-compose file
+10e2cd9db14f54724dc6529629c667b7b5ff9799 6a3ff2001686c2f07df2f61e624929cd7b63710c Anna Slastnikova <anna.slastnikova@gmail.com> 1473942444 +0100	commit: set ordering in the puppet
+6a3ff2001686c2f07df2f61e624929cd7b63710c 50043b0b3fa8f2a09302afcd08feeb7481a8464d Anna Slastnikova <anna.slastnikova@gmail.com> 1473952848 +0100	commit: install mocha; add random test
+50043b0b3fa8f2a09302afcd08feeb7481a8464d 2471600b882eb484d7f3487eececa7121772638e Anna Slastnikova <anna.slastnikova@gmail.com> 1473953091 +0100	commit: add building images resources in puppet
+2471600b882eb484d7f3487eececa7121772638e edacdb8b85e67f6e22d9ed83b228e3d15f05a6f8 Anna Slastnikova <anna.slastnikova@gmail.com> 1473953950 +0100	commit: fix error
+edacdb8b85e67f6e22d9ed83b228e3d15f05a6f8 edc75d920f55303b04061772c7c9d11df5ee21d6 Anna Slastnikova <anna.slastnikova@gmail.com> 1473957600 +0100	commit: add vagrant + tests for node.js
+edc75d920f55303b04061772c7c9d11df5ee21d6 2227d09e89157833811ad18d17adcc1ee4001ae6 Anna Slastnikova <anna.slastnikova@gmail.com> 1473957765 +0100	commit: made test script executable
+2227d09e89157833811ad18d17adcc1ee4001ae6 39295eaabbca028a2dc72515a0ae1dedd8ae3c83 Anna Slastnikova <anna.slastnikova@gmail.com> 1473957989 +0100	commit: fir typo
+39295eaabbca028a2dc72515a0ae1dedd8ae3c83 f20c9b4afe0746db1f6175c2e47317140b46b4b5 Anna Slastnikova <anna.slastnikova@gmail.com> 1473959733 +0100	commit: custom vagrant jenkins
+f20c9b4afe0746db1f6175c2e47317140b46b4b5 6dd569b5c7cf2f681a47b14f34880df12d7028a2 Anna Slastnikova <anna.slastnikova@gmail.com> 1473977791 +0100	commit: fix docker-compose in puppet
+6dd569b5c7cf2f681a47b14f34880df12d7028a2 8ee64a34720dcf256f624e54ef90dc43949643c3 Anna Slastnikova <anna.slastnikova@gmail.com> 1474029222 +0100	commit: reorganise vagrant logic
+8ee64a34720dcf256f624e54ef90dc43949643c3 c230666d985869b445ba8f8d6967afbec9fc8c42 Anna Slastnikova <anna.slastnikova@gmail.com> 1475496102 +0100	commit: 1) add node.js tests; 2) use node.js request library
+c230666d985869b445ba8f8d6967afbec9fc8c42 34343e0f2586f83242771a129ab653aadfd2d85c Anna Slastnikova <anna.slastnikova@gmail.com> 1475496251 +0100	commit: add one more command in Dockerfile for tests for node.js client app
+34343e0f2586f83242771a129ab653aadfd2d85c 7d3a23d28798dc7dd723fd395901be074dc374b2 Anna Slastnikova <anna.slastnikova@gmail.com> 1475580745 +0100	commit: 1) fix typos; 2) install plugin for pipeline; 3) add an image for readme
+7d3a23d28798dc7dd723fd395901be074dc374b2 50fa595ebd6ecb31cb44a50debb3d867d235eeb1 Anna Slastnikova <anna.slastnikova@gmail.com> 1475580971 +0100	pull: Merge made by the 'recursive' strategy.
+50fa595ebd6ecb31cb44a50debb3d867d235eeb1 e6212c4c3d3b52e298c6f90f034b6d85757e37a8 Anna Slastnikova <anna.slastnikova@gmail.com> 1475584944 +0100	commit: add special file for Jenkins pipeline
+e6212c4c3d3b52e298c6f90f034b6d85757e37a8 91d30294bac8ce6b727bce01964353fecd1ec877 Anna Slastnikova <anna.slastnikova@gmail.com> 1475584956 +0100	pull: Merge made by the 'recursive' strategy.
