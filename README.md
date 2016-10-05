@@ -207,7 +207,7 @@ This script is also stored at the github repository as **Jenkinsfile**.
     
 One of the main advantaes of Jenkins' pipelins is a graphical representaion:
 
-![](https://rawgit.com/ozzann/client-server-app/master/images/pipeline.png)
+![](https://cdn.rawgit.com/ozzann/client-server-app/master/pipeline.png)
 
 
 ## Puppet management
