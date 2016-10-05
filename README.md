@@ -46,11 +46,25 @@ Moreover, at the special port 9081 one can watch localhost's Metrics.
 
 
 
-## Server application
+## RESTful web service
 
 ### Overview
 
-Server application is a Java application. It was created with very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. In this case libraries to support REST API, HTTP server and JSON features are used. As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
+The RESTful web service was built with using very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. Among the variety of these libraries we are using the following:
+
+- Jetty for HTTP
+
+There is no web-application without HTTP, so Dropwizard kindly provides Jetty HTTP library to embed HTTP server into the project.
+
+- Jersey for REST
+
+<To be done...>
+
+- Jackson for JSON
+
+<To be done....>
+
+As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
 
 		GET /hello-world 
     	GET /hello-world?name=Harry
@@ -61,7 +75,11 @@ Both of them respond with a string in JSON format:
         
 where **id** field is the number of request, the **content** is just greeting message. By default when a name is not defined the server responds with the content: "Hello, world!".
 
+### Testing
 
+Dropwizard also provides some handy classes for testing both representation and resource classes as well as JUnit for the integration testing. 
+
+<To be done...>
 
 ### Dockerfile
 
