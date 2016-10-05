@@ -182,11 +182,11 @@ Pipelines are built with simple text scripts that use a Pipeline DSL (domain-spe
 
 For the previous two stages script **run_tests.sh** has similar structure. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
 
-	In the case of the client application it's:
+In the case of the client application it's:
 
 		CMD ["npm","test"]
         
-	In the case of the server app it's:
+In the case of the server app it's:
 
 		CMD mvn test
         
@@ -194,8 +194,8 @@ For the previous two stages script **run_tests.sh** has similar structure. In bo
 - **Deployment stage**
 
 	The last stage is responsible for deployment to the Puppet Master VM IP **192.168.56.110**. It does so by these commands:
-
-        sh "sshpass -p vagrant rsync -re 'ssh -o StrictHostKeyChecking=no' client-app/ vagrant@192.168.56.110:/etc/puppet/files/client-app";
+	
+          sh "sshpass -p vagrant rsync -re 'ssh -o StrictHostKeyChecking=no' client-app/ vagrant@192.168.56.110:/etc/puppet/files/client-app";
           sh "sshpass -p vagrant rsync -re 'ssh -o StrictHostKeyChecking=no'  server-app/ vagrant@192.168.56.110:/etc/puppet/files/server-app";
           sh "sshpass -p vagrant rsync -e 'ssh -o StrictHostKeyChecking=no' puppet/manifests/site.pp vagrant@192.168.56.110:/etc/puppet/manifests";
           sh "sshpass -p vagrant rsync -re 'ssh -o StrictHostKeyChecking=no'  puppet/modules/* vagrant@192.168.56.110:/etc/puppet/modules";
@@ -205,7 +205,7 @@ For the previous two stages script **run_tests.sh** has similar structure. In bo
     
 This script is also stored at the github repository as **Jenkinsfile**.
     
-Pipelines in Jenkins also have a clear graphical representaion:
+One of the main advantaes of Jenkins' pipelins is a graphical representaion:
 
 ![](https://rawgit.com/ozzann/client-server-app/master/images/pipeline.png)
 
