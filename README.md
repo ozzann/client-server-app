@@ -1,7 +1,7 @@
 ## The client-server application demonstrating wide stack of technologies for CI and CD
 
 This repo contains two applications written in different languages and the pipeline for their deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The goal of this project is to demonstrate variety of different tools used for Continuous Integration and  Deployment. As an example, a simple client-server application is considered.
-Since the project is represented simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins on it, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
+Since the project is presented a simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for the Puppet Master.
 
 
 ## Prerequisites
