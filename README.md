@@ -205,7 +205,7 @@ At this stage Jenkins just executes bash script which contains all required inst
 
 With Puppet, you can define the state of an IT infrastructure, and Puppet automatically enforces the desired state. Puppet automates every step of the software delivery process, from provisioning of physical and virtual machines to orchestration and reporting; from early-stage code development through testing, production release and updates.
 
-In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production and after that it runs a deployment script.
+In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production, then remove old irrelevant images which are **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and run docker compose.
 
 In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for client and server apps are sent to **client-app** and server-app directpries correspondongly by using rsync command in Jenkins pipeline.
 
