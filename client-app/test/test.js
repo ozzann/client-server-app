@@ -10,7 +10,7 @@ describe('GET /hello', function() {
 
     it("should return server's response be default", function(done) {
 
-      nock("http://172.18.0.22:8080")
+      nock("http://localhost:9080")
       .defaultReplyHeaders({
           'Content-Type': 'application/json'
         })
@@ -39,7 +39,7 @@ describe('GET /hello', function() {
       var name = "client";
       var path = '/hello-world?name=' + name;
 
-      nock("http://172.18.0.22:8080")
+      nock("http://localhost:9080")
       .defaultReplyHeaders({
           'Content-Type': 'application/json'
         })
