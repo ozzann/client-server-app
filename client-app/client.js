@@ -30,7 +30,7 @@ function sayHelloToServer(res, path){
 
   var request = require("request");
 
-  var fullUrl = 'http://172.18.0.22:9080' + path;
+  var fullUrl = 'http://172.18.0.22:8080' + path;
   var options = {
     url: fullUrl,
     timeout: 500,

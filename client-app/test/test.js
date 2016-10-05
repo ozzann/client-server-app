@@ -10,15 +10,12 @@ describe('GET /hello', function() {
 
     it("should return server's response be default", function(done) {
 
-      nock("http://172.18.0.22:9080")
+      nock("http://172.18.0.22:8080")
       .defaultReplyHeaders({
           'Content-Type': 'application/json'
         })
         .get('/hello-world')
-        .reply(200, {
-          "id": 1,
-          "content": "Hello, world!"
-        });
+        .reply(200, {"id":1,"content":"Hello, world!"});
 
       request(app)
       .get('/hello/')
@@ -39,15 +36,12 @@ describe('GET /hello', function() {
       var name = "client";
       var path = '/hello-world?name=' + name;
 
-      nock("http://172.18.0.22:9080")
+      nock("http://172.18.0.22:8080")
       .defaultReplyHeaders({
           'Content-Type': 'application/json'
         })
         .get(path)
-        .reply(200, {
-          "id": 1,
-          "content": "Hello, client!"
-        });
+        .reply(200, {"id":1,"content":"Hello, client!"});
 
       request(app)
       .get('/hello/client')
