@@ -205,7 +205,7 @@ In the case of the server app it's:
     
 This script is also stored at the github repository as **Jenkinsfile**.
     
-One of the main advantaes of Jenkins' pipelins is a graphical representaion:
+One of the main advantaes of Jenkins' pipelines is a descriptive graphical representaion:
 
 ![](https://cdn.rawgit.com/ozzann/client-server-app/master/pipeline.png)
 
