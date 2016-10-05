@@ -7,8 +7,6 @@ services:
         - 3000
       ports:
         - "3000:3000"
-      networks:
-        - app_net
 
   server:
       build: ./server-app
