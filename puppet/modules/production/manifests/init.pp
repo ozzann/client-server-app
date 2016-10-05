@@ -29,7 +29,7 @@ class production {
 
     exec {'remove_old_images':
         require => File['/home/vagrant/server-app'],
-        command => "/bin/bash -c 'docker stop $(docker ps -q); docker rm $(docker ps -q -a); docker rmi vagrant_server vagrant_client"
+        command => "/bin/bash -c 'docker stop $(docker ps -q); docker rm $(docker ps -q -a); docker rmi vagrant_server vagrant_client'"
     }
 
     file { '/home/vagrant/docker-compose.yml':
@@ -44,7 +44,8 @@ class production {
     }
 
     docker_compose {'/home/vagrant/docker-compose.yml':
-      ensure => present
+      ensure => present,
+      timeout => 2000
     }
 
 }
