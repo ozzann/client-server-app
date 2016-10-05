@@ -40,12 +40,11 @@ class production {
     }
 
     class {'docker::compose':
-      ensure => present,
+      ensure => present
     }
 
     docker_compose {'/home/vagrant/docker-compose.yml':
-      ensure => present,
-      timeout => 2000
+      ensure => present
     }
 
 }
