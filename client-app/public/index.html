@@ -21,7 +21,11 @@
                 url: 'http://localhost:3000/hello/' + name,
                 type: 'GET',
                 success: function(data){
-                  appendRow(data);
+                  var dataText = data.responseText;
+                  dataText = dataText.replace(/^"/, "'");
+                  dataText = dataText.replace(/"$/, "'");
+
+                  appendRow(dataText);
                 },
                 error: function(data){
                   var errorMsg =
