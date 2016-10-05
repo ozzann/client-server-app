@@ -120,9 +120,7 @@ Because it's a Node.js application, it requires using npm commands in its Docker
 
 Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
-There are two services describe in the docker-compose file: for the server app's and client's builds. Also the information about exposing ports is included. Because the server has to be assigned with static IP address, there has to be a network which also describe in the docker-compose configuration.
-
-With this instruction the network **app_net** is created:
+The tricky part in setting two containers working properly is to set up a network properly. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge (called docker0), attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside. Assuming that while creating containers from this project, it can be assigne with random IP addresses, it may be impossible for the client to ping the server. So, it was decided to assign the server with static specific IP address **172.18.0.22app_net** and put two these containers into one network. The configuration of the network is described in docker-compose file as followingcreated:
 
     networks:
         app_net:
@@ -137,6 +135,9 @@ Then the choosen IP addres is assigned for the server:
           networks:
             app_net:
               ipv4_address: 172.18.0.22
+              
+As a result the server can be reachable from outside as **localhost:9080** or **localhost:9081** to get its metrics. But the client container can communicate it only by **172.18.0.22:8080**.
+
 
 
 
@@ -266,5 +267,3 @@ Jenkins VM has **bootstrap-jenkins.sh** provisioning script. Firstly, this scrip
  
  		sudo apt-get -yq update
 		sudo apt-get install -yq sshpass
-
-
