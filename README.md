@@ -1,7 +1,7 @@
 ## The client-server application demonstrating wide stack of technologies for CI and CD
 
 This repo contains two applications written in different languages and the pipeline for their deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The goal of this project is to demonstrate variety of different tools used for Continuous Integration and  Deployment. As an example, a simple client-server application is considered.
-Since the project is presented a simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for the Puppet Master.
+Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
 
 
 ## Prerequisites
@@ -10,12 +10,12 @@ In order to be able to run the application you have to have [Vagrant](https://ww
 
 ## Usage
 
-The tool which allows you to have all the system including required virtual machines on your computer is Vagrant. So, to provision the system you have to clone the repo, then go to vagrant directory and run simple command 'vagrant up':
+The tool which allows you to have all required virtual machines on your computer is Vagrant. So, to provision the system you have to clone the repo, then go to the vagrant directory and run simple command 'vagrant up':
 
 		cd vagrant
         vagrant up
         
-As a result three virtual machines will be created: one **jenkins.vm** is for Jenkins, the second one **puppet.vm** is a Puppet master and the last one **production.vm** is a simplified analog of production virtual machine.
+As a result three virtual machines will be created: one **jenkins.vm** is for Jenkins, the second one **puppet.vm** is a Puppet master and the last one **production.vm** is a simplified version of a production system.
 
 Then after all VMs had successfully set up, you have to run Jenkins **client-server-app** job and after that synchronize Puppet master and Puppet Client manually by running these commands:
 
@@ -36,13 +36,13 @@ Then after all VMs had successfully set up, you have to run Jenkins **client-ser
 		sudo puppet agent -t
         
         
-After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm** VM. The client app web-page is presented there, so you can check if the server's running at this page. 
+After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm** VM. The client app web-page is presented there, so you can check if the server is running at this page. 
 Also it's possible to check server's availability by sending GET requests to  http://localhost:9080:
 
 		GET http://loclahost:9080/hello-world
         GET http://localhost:9080/hello-world?name=your-name
         
-Moreover, at the special port 9081 one can watch server's Metrics.
+Moreover, at the special port 9081 one can watch localhost's Metrics.
 
 
 
@@ -50,7 +50,7 @@ Moreover, at the special port 9081 one can watch server's Metrics.
 
 ### Overview
 
-Server application is a Java application. It was created with very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. In this case the most important libraries using to support REST API, HTTP server and JSON features. As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
+Server application is a Java application. It was created with very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. In this case libraries to support REST API, HTTP server and JSON features are used. As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
 
 		GET /hello-world 
     	GET /hello-world?name=Harry
@@ -59,7 +59,7 @@ Both of them respond with a string in JSON format:
 		
     	{"id":24;"content":"Hello, Harry!"}
         
-where **id** field is the number of request, the **content** is just greeting message. By default when a name is not defined the server responds with this content: "Hello, world!".
+where **id** field is the number of request, the **content** is just greeting message. By default when a name is not defined the server responds with the content: "Hello, world!".
 
 
 
@@ -107,10 +107,9 @@ Node.js provides many very useful frameworks and modules which significantly sim
 The web-interface is build with Bootstrap framework.
 
 
-
 ### Dockerfile
 
-Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposing in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
 
     	FROM node:4-onbuild
 
@@ -125,10 +124,10 @@ Because it's a Node.js application, the base image is a node image. The applicat
 
 ## Docker-compose as a glue
 
-Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
+Docker itself is a powerful tool which allows us to run any application in a container anywhere. Docker-compose is its extension which does the same work but for multi-container Docker applications. In addition to Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
-The tricky part in setting two containers working properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
-If the server doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact server's IP to ping it. So, it was decided to assign the server with static IP address **172.18.0.22app_net** and put two these containers into one network. The configuration of the network is described in docker-compose file as following:
+The tricky part in setting two containers work properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
+If the server doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact server's IP to ping it. So, it was decided to assign the server with static IP address **172.18.0.22** and put two these containers into one network **app_net**. The configuration of the network is described in docker-compose file as following:
 
     networks:
         app_net:
@@ -144,7 +143,7 @@ Then the choosen IP addres is assigned for the server:
             app_net:
               ipv4_address: 172.18.0.22
               
-As a result the server can be reachable from outside as **localhost:9080** or **localhost:9081** to get its metrics. But the client container can communicate it only by **172.18.0.22:9080**.
+As a result the server can be reachable from outside as **localhost:9080** or **localhost:9081** to get its metrics. But the client container can communicate to it only by **172.18.0.22:9080**.
 
 
 
@@ -152,7 +151,7 @@ As a result the server can be reachable from outside as **localhost:9080** or **
 
 Jenkins is a powerful tool for Continuous Integration. It allows you to run tests almost immediately after commits. Moreover, Jenkins has just a huge set of different plugins for any purpose.
 
-In this case Jenkins is bound to GitHub repository by using just one plugin called **GitHub Plugin**.
+In this case Jenkins is bound to GitHub repository by using a plugin called **GitHub Plugin**.
 
 There are two ways to detect commits and then run builds: polling SCM or set GitHub webhook so after every commit Jenkins build could run immediately. In our case polling SCM is chosen, it's scheduled to poll the GitHub repo every 5 minutes:
 
@@ -180,13 +179,13 @@ Pipelines are built with simple text scripts that use a Pipeline DSL (domain-spe
 
 	At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
-For the previous two stages script **run_tests.sh** has similar structure. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
+For the previous two stages both of the scripts **run_tests.sh** for client and server apps have the similar structures. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
 
 In the case of the client application it's:
 
 		CMD ["npm","test"]
         
-In the case of the server app it's:
+For the server app it should be:
 
 		CMD mvn test
         
@@ -205,7 +204,7 @@ In the case of the server app it's:
     
 This script is also stored at the github repository as **Jenkinsfile**.
     
-One of the main advantaes of Jenkins' pipelines is a descriptive graphical representaion:
+One of the main advantages of Jenkins' pipelines is a descriptive graphical representaion:
 
 ![](https://cdn.rawgit.com/ozzann/client-server-app/master/pipeline.png)
 
