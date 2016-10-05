@@ -21,23 +21,18 @@
                 url: 'http://localhost:3000/hello/' + name,
                 type: 'GET',
                 success: function(data){
-                  var dataText = data.responseText;
-                  dataText = dataText.replace(/^"/, "'");
-                  dataText = dataText.replace(/"$/, "'");
-
-                  appendRow(dataText);
+                  appendRow(data);
                 },
                 error: function(data){
                   var errorMsg =
                     '{"id":"","error":"1","content":"Error: could not connect to the server"}';
-                  appendRow(errorMsg);
+                  var errorMsgObj = jQuery.parseJSON(errorMsg);
+                  appendRow(errorMsgObj);
                 }
             });
 
-            function appendRow(data){
+            function appendRow(dataObj){
                 var requestTime = new Date().toLocaleString();
-
-                var dataObj = jQuery.parseJSON(data);
 
                 var rowHtml = !dataObj.error ? '<tr>'
                   : '<tr class="errorRow">';
