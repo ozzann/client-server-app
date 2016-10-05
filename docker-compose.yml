@@ -7,6 +7,8 @@ services:
         - 3000
       ports:
         - "3000:3000"
+      networks:
+        - app_net
 
   server:
       build: ./server-app
@@ -16,4 +18,13 @@ services:
       ports:
         - "9080:8080"
         - "9081:8081"
+      networks:
+        app_net:
+          ipv4_address: 172.18.0.22
+
+networks:
+    app_net:
+        ipam:
+            config:
+            -  subnet: "172.18.0.0/16"
 
