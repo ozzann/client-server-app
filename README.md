@@ -1,6 +1,7 @@
 ## The client-server application demonstrating wide stack of technologies for CI and CD
 
-This repo contains two applications written in different languages and the pipeline for their deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The goal of this project is to demonstrate variety of different tools used for Continuous Integration and  Deployment. As an example, a simple client-server application is considered.
+This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The client part is a Node.js application providing a web-interface. The server part is a RESTful web-service. Alos for each of the parts there are automated functional tests.
+The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
 Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
 
 
@@ -45,7 +46,6 @@ Also it's possible to check server's availability by sending GET requests to  ht
 Moreover, at the special port 9081 one can watch localhost's Metrics.
 
 
-
 ## RESTful web service
 
 ### Overview
@@ -57,8 +57,6 @@ The RESTful web service was built with using very powerful [Dropwizard](http://w
 There is no web-application without HTTP, so Dropwizard kindly provides Jetty HTTP library to embed HTTP server into the project.
 
 - Jersey for REST
-
-<To be done...>
 
 - Jackson for JSON
 
@@ -77,13 +75,13 @@ where **id** field is the number of request, the **content** is just greeting me
 
 ### Testing
 
-Dropwizard also provides some handy classes for testing both representation and resource classes as well as JUnit for the integration testing. 
+[Dropwizard](http://www.dropwizard.io/1.0.2/docs/) also provides some handy classes for testing both representation and resource classes as well as JUnit for the integration testing. 
 
 <To be done...>
 
 ### Dockerfile
 
-The Dockerfile for the server app is quite simple. It's based on java-8 image. Then it just copies files of the app in a corresponding directory, exposes ports and runs the app with a single command. Here is a snippet demonstrating how it looks like put all together:
+The Dockerfile for the web-service is quite simple. It's based on java-8 image. Then it just copies files of the app in a corresponding directory, exposes ports and runs the app with a single command. Here is a snippet demonstrating how it looks like put all together:
 
 		FROM java:8
 
@@ -94,14 +92,14 @@ The Dockerfile for the server app is quite simple. It's based on java-8 image. T
 
         CMD java -jar hello-world-1.0.0.jar server config.yml 
 
-Because the server app uses 8080 and 8081 ports, they should be exposed in the Dockerfile.
+Because the web-service uses 8080 and 8081 ports, they should be exposed in the Dockerfile.
 
 
 ## Client application
 
 ### Overview
 
-The client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to ping the server.
+The client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
 Node.js provides many very useful frameworks and modules which significantly simplify the process of development. In this the following list of frameworks is used:
 
 - **Express framework** makes the client listening to a 3000 port
