@@ -1,6 +1,6 @@
-## The client-server application demonstrating wide stack of technologies for CI and CD
+## The pipeline for deployment of client-server RESTful web-services
 
-This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The client part is a Node.js application providing a web-interface. The server part is a RESTful web-service. Alos for each of the parts there are automated functional tests.
+This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server parts are RESTful web services. The client is a Node.js application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
 The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
 Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
 
@@ -37,32 +37,42 @@ Then after all VMs had successfully set up, you have to run Jenkins **client-ser
 		sudo puppet agent -t
         
         
-After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm** VM. The client app web-page is presented there, so you can check if the server is running at this page. 
-Also it's possible to check server's availability by sending GET requests to  http://localhost:9080:
+After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm** VM. The client app web-page is presented there, so you can check if the server is running at this page.
+Since both of the application are web-services, one can check their availability by sending requests:
+
+- check the client app is running
+
+		GET http://localhost:3000/hello
+        GET http://localhost:3000/hello/your-name
+        
+- check the server app is running
 
 		GET http://loclahost:9080/hello-world
         GET http://localhost:9080/hello-world?name=your-name
         
-Moreover, at the special port 9081 one can watch localhost's Metrics.
+	Moreover, at the special port 9081 one can watch localhost's Metrics.
 
 
-## RESTful web service
+## Server RESTful web-service
 
 ### Overview
 
 The RESTful web service was built with using very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. Among the variety of these libraries we are using the following:
 
-- Jetty for HTTP
+- **Jetty** for HTTP
 
 There is no web-application without HTTP, so Dropwizard kindly provides Jetty HTTP library to embed HTTP server into the project.
 
-- Jersey for REST
+- **Jersey** for REST
 
-- Jackson for JSON
+Developing RESTful Web services is not an easy task. In order to simplify it Java API for RESTful Services (JAX-RS) has been designed. Jersy is a toolkit which provides support for JAX-RS API and extends it with additional features and utilities.
 
-<To be done....>
+- **Jackson** for JSON
 
-As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
+It is a multi-purpose Java library for processing JSON data format. As everything in Dropwizard it aims to be the best possible combination of fast, correct, lightweight, and ergonomic for developers.
+
+
+As a result they allow us to create a web application listening on 8080 port where we can send some simple requests:
 
 		GET /hello-world 
     	GET /hello-world?name=Harry
@@ -77,7 +87,7 @@ where **id** field is the number of request, the **content** is just greeting me
 
 [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) also provides some handy classes for testing both representation and resource classes as well as JUnit for the integration testing. 
 
-<To be done...>
+
 
 ### Dockerfile
 
@@ -95,7 +105,7 @@ The Dockerfile for the web-service is quite simple. It's based on java-8 image. 
 Because the web-service uses 8080 and 8081 ports, they should be exposed in the Dockerfile.
 
 
-## Client application
+## Client RESTful web-service
 
 ### Overview
 
@@ -143,7 +153,7 @@ Because it's a Node.js application, the base image is a node image. The applicat
 Docker itself is a powerful tool which allows us to run any application in a container anywhere. Docker-compose is its extension which does the same work but for multi-container Docker applications. In addition to Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
 The tricky part in setting two containers work properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
-If the server doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact server's IP to ping it. So, it was decided to assign the server with static IP address **172.18.0.22** and put two these containers into one network **app_net**. The configuration of the network is described in docker-compose file as following:
+If the web service doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact web service's IP to ping it. So, it was decided to assign the web service with static IP address **172.18.0.22** and put two these containers into one network **app_net**. The configuration of the network is described in docker-compose file as following:
 
     networks:
         app_net:
@@ -151,7 +161,7 @@ If the server doesn't have a static IP, every time it can be assigned to differe
                 config:
                 -  subnet: "172.18.0.0/16"
 
-Then the choosen IP addres is assigned for the server:
+Then the choosen IP addres is assigned for the web service:
 
     server:
           ...
@@ -195,7 +205,7 @@ Pipelines are built with simple text scripts that use a Pipeline DSL (domain-spe
 
 	At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
-For the previous two stages both of the scripts **run_tests.sh** for client and server apps have the similar structures. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
+For the previous two stages both of the scripts **run_tests.sh** for client and web-service apps have the similar structures. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
 
 In the case of the client application it's:
 
@@ -231,7 +241,7 @@ With Puppet, you can define the state of an IT infrastructure, and Puppet automa
 
 In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production, then removes old irrelevant docker images  **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and eventually runs docker compose.
 
-In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for the client and server apps are sent to **client-app** and **server-app** directories correspondingly by using rsync command in Jenkins pipeline.
+In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for the client and web-service apps are sent to **client-app** and **server-app** directories correspondingly by using rsync command in Jenkins pipeline.
 
 Besdies copying files, Puppet Master has to run both of the applications using docker-compose. The docker-compose type to run Compose is already included in the docker module and we have to make sure the docker-compose utility is installed:
 
