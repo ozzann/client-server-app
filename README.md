@@ -149,7 +149,7 @@ Because it's a Node.js application, the base image is a node image. The applicat
 
 Docker itself is a powerful tool which allows us to run any application in a container anywhere. Docker-compose is its extension which does the same work but for multi-container Docker applications. In addition to Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
-The tricky part in setting two containers work properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
+The tricky part in setting two containers work properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under the hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
 If the web service doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact web service's IP to ping it. So, it was decided to assign the web service with static IP address **172.18.0.22** and put two these containers into one network **app_net**. The configuration of the network is described in docker-compose file as following:
 
     networks:
