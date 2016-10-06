@@ -1,6 +1,6 @@
 ## The pipeline for deployment of client-server RESTful web-services
 
-This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server parts are RESTful web services. The client is a Node.js application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
+This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
 The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
 Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
 
@@ -50,7 +50,7 @@ Since both of the application are web-services, one can check their availability
 		GET http://loclahost:9080/hello-world
         GET http://localhost:9080/hello-world?name=your-name
         
-	Moreover, at the special port 9081 one can watch localhost's Metrics.
+	Moreover, at the special port 9081 one can watch server app's Metrics.
 
 
 ## Server RESTful web-service
@@ -83,10 +83,7 @@ Both of them respond with a string in JSON format:
         
 where **id** field is the number of request, the **content** is just greeting message. By default when a name is not defined the server responds with the content: "Hello, world!".
 
-### Testing
-
 [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) also provides some handy classes for testing both representation and resource classes as well as JUnit for the integration testing. 
-
 
 
 ### Dockerfile
