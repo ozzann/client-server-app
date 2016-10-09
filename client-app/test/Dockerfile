@@ -1,7 +1,6 @@
 FROM node:4-onbuild
 
-ADD . /usr/src/app
-RUN npm install  
+ADD . /usr/src/app 
 
 EXPOSE 3000
 
