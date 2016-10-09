@@ -5,5 +5,5 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-CMD ["npm", "install"]
+CMD ["npm", "install","--dev"]
 CMD ["npm","test"] 
