@@ -4,11 +4,11 @@ var nock = require('nock');
 var request = require('supertest');
 var expect = require('chai').expect;
 
-var app = require("../client.js").getApp;
+var app = require("../src/client.js").getApp;
 
 describe('GET /hello', function() {
 
-    it("should return server's response be default", function(done) {
+    it("server should return default message", function(done) {
 
       nock("http://172.18.0.22:8080")
       .defaultReplyHeaders({
@@ -31,7 +31,7 @@ describe('GET /hello', function() {
 
   describe('GET /hello/NAME', function() {
 
-    it("should return server's special greetings for client", function(done) {
+    it("server should respond with special greetings for the client", function(done) {
 
       var name = "client";
       var path = '/hello-world?name=' + name;
