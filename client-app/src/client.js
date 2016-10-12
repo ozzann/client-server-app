@@ -1,18 +1,14 @@
 var express = require("express");
 var app = express();
 
-var path = __dirname + '/public/';
-
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname));
 
 app.get("/",function(req,res){
-  res.sendFile(path + "index.html");
+  res.sendFile(__dirname + "index.html");
 });
 
 app.get("/hello", function(req, res){
   var path = '/hello-world';
-
-console.log("Hello!");
 
   sayHelloToServer(res, path);
 });
@@ -33,7 +29,6 @@ function sayHelloToServer(res, path){
   var fullUrl = 'http://172.18.0.22:8080' + path;
   var options = {
     url: fullUrl,
-    timeout: 500,
     headers: {
       'Content-Type': 'application/json'
     }
