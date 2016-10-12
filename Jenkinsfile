@@ -18,5 +18,6 @@ node{
           sh "sshpass -p vagrant rsync -e 'ssh -o StrictHostKeyChecking=no' puppet/manifests/site.pp vagrant@192.168.56.110:/etc/puppet/manifests";
           sh "sshpass -p vagrant rsync -re 'ssh -o StrictHostKeyChecking=no'  puppet/modules/* vagrant@192.168.56.110:/etc/puppet/modules";
           sh "sshpass -p vagrant rsync -e 'ssh -o StrictHostKeyChecking=no' docker-compose.yml vagrant@192.168.56.110:/etc/puppet/files";
+	  sh "sshpass -p vagrant rsync -e 'ssh -o StrictHostKeyChecking=no' remove_old_docker_images.sh vagrant@192.168.56.110:/etc/puppet/files";
   }
 }
