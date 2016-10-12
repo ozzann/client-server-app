@@ -1,7 +1,8 @@
-## The client-server application demonstrating wide stack of technologies for CI and CD
+## The pipeline for deployment of client-server RESTful web-services
 
-This repo contains two applications written in different languages and the pipeline for their deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. The goal of this project is to demonstrate variety of different tools used for Continuous Integration and  Deployment. As an example, a simple client-server application is considered.
-Since the project is represented simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins on it, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
+This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
+The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
+Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
 
 
 ## Prerequisites
@@ -10,12 +11,12 @@ In order to be able to run the application you have to have [Vagrant](https://ww
 
 ## Usage
 
-The tool which allows you to have all the system including required virtual machines on your computer is Vagrant. So, to provision the system you have to clone the repo, then go to vagrant directory and run simple command 'vagrant up':
+The tool which allows you to have all required virtual machines on your computer is Vagrant. So, to provision the system you have to clone the repo, then go to the vagrant directory and run simple command 'vagrant up':
 
 		cd vagrant
         vagrant up
         
-As a result three virtual machines will be created: one **jenkins.vm** is for Jenkins, the second one **puppet.vm** is a Puppet master and the last one **production.vm** is a simplified analog of production virtual machine.
+As a result three virtual machines will be created: one **jenkins.vm** is for Jenkins, the second one **puppet.vm** is a Puppet master and the last one **production.vm** is a simplified version of a production system.
 
 Then after all VMs had successfully set up, you have to run Jenkins **client-server-app** job and after that synchronize Puppet master and Puppet Client manually by running these commands:
 
@@ -36,21 +37,42 @@ Then after all VMs had successfully set up, you have to run Jenkins **client-ser
 		sudo puppet agent -t
         
         
-After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm** VM. The client app web-page is presented there, so you can check if the server's running at this page. 
-Also it's possible to check server's availability by sending GET requests to  http://localhost:9080:
+After that one can check if application are running. In order to do this just go to **http://localhost:3000** on **production.vm** VM. The client app web-page is presented there, so you can check if the server is running at this page.
+Since both of the application are web-services, one can check their availability by sending requests:
+
+- check the client app is running
+
+		GET http://localhost:3000/hello
+        GET http://localhost:3000/hello/your-name
+        
+- check the server app is running
 
 		GET http://loclahost:9080/hello-world
         GET http://localhost:9080/hello-world?name=your-name
         
-Moreover, at the special port 9081 one can watch server's Metrics.
+	Moreover, at the special port 9081 one can watch server app's Metrics.
 
 
-
-## Server application
+## Server RESTful web-service
 
 ### Overview
 
-Server application is a Java application. It was created with very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. In this case the most important libraries using to support REST API, HTTP server and JSON features. As a result they allow us to create a server listening on 8080 port where we can send some simple requests:
+The RESTful web service was built with using very powerful [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) framework. Dropwizard contains many useful libraries. Among the variety of these libraries we are using the following:
+
+- **Jetty** for HTTP
+
+There is no web-application without HTTP, so Dropwizard kindly provides Jetty HTTP library to embed HTTP server into the project.
+
+- **Jersey** for REST
+
+Developing RESTful Web services is not an easy task. In order to simplify it Java API for RESTful Services (JAX-RS) has been designed. Jersy is a toolkit which provides support for JAX-RS API and extends it with additional features and utilities.
+
+- **Jackson** for JSON
+
+It is a multi-purpose Java library for processing JSON data format. As everything in Dropwizard it aims to be the best possible combination of fast, correct, lightweight, and ergonomic for developers.
+
+
+As a result they allow us to create a web application listening on 8080 port where we can send some simple requests:
 
 		GET /hello-world 
     	GET /hello-world?name=Harry
@@ -59,13 +81,14 @@ Both of them respond with a string in JSON format:
 		
     	{"id":24;"content":"Hello, Harry!"}
         
-where **id** field is the number of request, the **content** is just greeting message. By default when a name is not defined the server responds with this content: "Hello, world!".
+where **id** field is the number of request, the **content** is just greeting message. By default when a name is not defined the server responds with the content: "Hello, world!".
 
+[Dropwizard](http://www.dropwizard.io/1.0.2/docs/) also provides some handy classes for testing both representation and resource classes as well as JUnit for the integration testing. 
 
 
 ### Dockerfile
 
-The Dockerfile for the server app is quite simple. It's based on java-8 image. Then it just copies files of the app in a corresponding directory, exposes ports and runs the app with a single command. Here is a snippet demonstrating how it looks like put all together:
+The Dockerfile for the web-service is quite simple. It's based on java-8 image. Then it just copies files of the app in a corresponding directory, exposes ports and runs the app with a single command. Here is a snippet demonstrating how it looks like put all together:
 
 		FROM java:8
 
@@ -76,14 +99,14 @@ The Dockerfile for the server app is quite simple. It's based on java-8 image. T
 
         CMD java -jar hello-world-1.0.0.jar server config.yml 
 
-Because the server app uses 8080 and 8081 ports, they should be exposed in the Dockerfile.
+Because the web-service uses 8080 and 8081 ports, they should be exposed in the Dockerfile.
 
 
-## Client application
+## Client RESTful web-service
 
 ### Overview
 
-The client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to ping the server.
+The client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
 Node.js provides many very useful frameworks and modules which significantly simplify the process of development. In this the following list of frameworks is used:
 
 - **Express framework** makes the client listening to a 3000 port
@@ -107,10 +130,9 @@ Node.js provides many very useful frameworks and modules which significantly sim
 The web-interface is build with Bootstrap framework.
 
 
-
 ### Dockerfile
 
-Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposing in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
 
     	FROM node:4-onbuild
 
@@ -125,10 +147,10 @@ Because it's a Node.js application, the base image is a node image. The applicat
 
 ## Docker-compose as a glue
 
-Docker itself is a powerful tool which allows to run any application in a container anywhere. Docker-compose is its extension which allows to run multi-container Docker applications. In addition for Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
+Docker itself is a powerful tool which allows us to run any application in a container anywhere. Docker-compose is its extension which does the same work but for multi-container Docker applications. In addition to Dockerfiles for each application, there is docker-composer.yml file defining the configuration of applications' services.  
 
-The tricky part in setting two containers working properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
-If the server doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact server's IP to ping it. So, it was decided to assign the server with static IP address **172.18.0.22app_net** and put two these containers into one network. The configuration of the network is described in docker-compose file as following:
+The tricky part in setting two containers work properly is to set up a network. There is [a good article](http://windsock.io/tag/docker-proxy/) explaining what is under the hood of docker networking and how containers communicate with each other. Briefly, Docker creates a virtual ethernet bridge **docker0**, attaches each container's network interface to the bridge, and uses network address translation (NAT) to reach containers outside.
+If the web service doesn't have a static IP, every time it can be assigned to different IP addreses. But it's not appropriate for the client because it has to know the exact web service's IP to ping it. So, it was decided to assign the web service with static IP address **172.18.0.22** and put two these containers into one network **app_net**. The configuration of the network is described in docker-compose file as following:
 
     networks:
         app_net:
@@ -136,7 +158,7 @@ If the server doesn't have a static IP, every time it can be assigned to differe
                 config:
                 -  subnet: "172.18.0.0/16"
 
-Then the choosen IP addres is assigned for the server:
+Then the choosen IP addres is assigned for the web service:
 
     server:
           ...
@@ -144,7 +166,7 @@ Then the choosen IP addres is assigned for the server:
             app_net:
               ipv4_address: 172.18.0.22
               
-As a result the server can be reachable from outside as **localhost:9080** or **localhost:9081** to get its metrics. But the client container can communicate it only by **172.18.0.22:9080**.
+As a result the server can be reachable from outside as **localhost:9080** or **localhost:9081** to get its metrics. But the client container can communicate to it only by **172.18.0.22:9080**.
 
 
 
@@ -152,7 +174,7 @@ As a result the server can be reachable from outside as **localhost:9080** or **
 
 Jenkins is a powerful tool for Continuous Integration. It allows you to run tests almost immediately after commits. Moreover, Jenkins has just a huge set of different plugins for any purpose.
 
-In this case Jenkins is bound to GitHub repository by using just one plugin called **GitHub Plugin**.
+In this case Jenkins is bound to GitHub repository by using a plugin called **GitHub Plugin**.
 
 There are two ways to detect commits and then run builds: polling SCM or set GitHub webhook so after every commit Jenkins build could run immediately. In our case polling SCM is chosen, it's scheduled to poll the GitHub repo every 5 minutes:
 
@@ -180,13 +202,13 @@ Pipelines are built with simple text scripts that use a Pipeline DSL (domain-spe
 
 	At this stage Jenkins just executes bash script which contains all required instructions and actions for running tests.
 
-For the previous two stages script **run_tests.sh** has similar structure. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
+For the previous two stages both of the scripts **run_tests.sh** for client and web-service apps have the similar structures. In both cases firstly all existing docker containers are removing and then the new one is created. The Dockerfiles for tests are almost the same as Dockerfiles for the apps, the only difference in a running command: it should run only tests steps.
 
 In the case of the client application it's:
 
 		CMD ["npm","test"]
         
-In the case of the server app it's:
+For the server app it should be:
 
 		CMD mvn test
         
@@ -205,7 +227,7 @@ In the case of the server app it's:
     
 This script is also stored at the github repository as **Jenkinsfile**.
     
-One of the main advantaes of Jenkins' pipelins is a graphical representaion:
+One of the main advantages of Jenkins' pipelines is a descriptive graphical representaion:
 
 ![](https://cdn.rawgit.com/ozzann/client-server-app/master/pipeline.png)
 
@@ -216,7 +238,7 @@ With Puppet, you can define the state of an IT infrastructure, and Puppet automa
 
 In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production, then removes old irrelevant docker images  **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and eventually runs docker compose.
 
-In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for the client and server apps are sent to **client-app** and **server-app** directories correspondingly by using rsync command in Jenkins pipeline.
+In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for the client and web-service apps are sent to **client-app** and **server-app** directories correspondingly by using rsync command in Jenkins pipeline.
 
 Besdies copying files, Puppet Master has to run both of the applications using docker-compose. The docker-compose type to run Compose is already included in the docker module and we have to make sure the docker-compose utility is installed:
 

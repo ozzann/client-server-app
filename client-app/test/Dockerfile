@@ -1,9 +1,9 @@
 FROM node:4-onbuild
 
 ADD . /usr/src/app
-RUN npm install  
+WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-CMD ["npm", "install"]
+CMD ["npm", "install","--dev"]
 CMD ["npm","test"] 
