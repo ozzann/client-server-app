@@ -5,5 +5,5 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-CMD ["npm", "install","--only=dev"]
+RUN npm install --only=dev
 CMD ["npm","test"] 

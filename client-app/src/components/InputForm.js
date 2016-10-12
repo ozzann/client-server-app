@@ -29,7 +29,6 @@ export default class InputForm extends React.Component {
         };
 
         var isValid = this.isNameValid(inputValue);
-        console.log(isValid);
         if( !isValid ){
             newStateObj.errorMessage = "Error! Name is not valid. It can contain any symbol excluding &, \\, / and spaces.";
             newStateObj.isErrorVisible = "visible";
@@ -42,7 +41,6 @@ export default class InputForm extends React.Component {
     isNameValid(name) {
         var regex = new RegExp('[\\\\\\s&/]');
         var matches = name.match(regex);
-        console.log(matches);
         return name.match(regex) ? false : true;
     }
 
