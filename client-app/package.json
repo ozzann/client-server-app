@@ -30,7 +30,6 @@
     "webpack": "^1.13.2"
   },
   "devDependencies": {
-    "babel-loader": "^6.2.5",
     "chai": "^3.5.0",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
