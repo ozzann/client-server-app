@@ -37,7 +37,7 @@ class production {
     }
 
     exec {'remove_old_images':
-        require => File['remove_old_docker_images'],
+        require => File['/home/vagrant/remove_old_docker_images.sh'],
         command => "/bin/bash -c 'chmod +x remove_old_docker_images.sh; ./remove_old_docker_images.sh'"
     }
 
@@ -45,7 +45,7 @@ class production {
         ensure => 'present',
         source => 'puppet:///extra_files/docker-compose.yml',
         owner => 'vagrant',
-        require => Exec['/home/vagrant/server-app']
+        require => File['/home/vagrant/server-app']
     }
 
     class {'docker::compose':

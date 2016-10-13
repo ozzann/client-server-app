@@ -6,7 +6,7 @@ then
         docker rm $CONTAINERS &> /dev/null
 fi
 
-IMAGES_TO_DELETE=( "vagrant_client" "vagrant_server" )
+IMAGES_TO_DELETE=( "vagrant_client" "vagrant_server" "server-app" "client-app" )
 for IMAGE in "${IMAGES_TO_DELETE[@]}"
 do
         DOCKER_IMAGE=$(docker images $IMAGE -q)
