@@ -27,14 +27,19 @@ class production {
         require => File['/home/vagrant/client-app']
     }
 
-    file { '/home/vagrant/remove_old_docker_images.sh':
+    exec {'rm home/vagrant/remove_old_docker_images.sh':
+        path => '/usr/bin:/usr/sbin:/bin',
+    }
+
+    file { 'remove_old_docker_images':
 	source => 'puppet:///extra_files/remove_old_docker_images.sh',
 	path => '/home/vagrant',
-	owner => 'vagrant'
+	owner => 'vagrant',
+	ensure => present
     }
 
     exec {'remove_old_images':
-        require => File['/home/vagrant/remove_old_docker_images.sh'],
+        require => File['remove_old_docker_images'],
         command => "/bin/bash -c './remove_old_docker_images.sh'"
     }
 
