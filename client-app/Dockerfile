@@ -1,8 +1,9 @@
 FROM node:4-onbuild
 
 ADD . /usr/src/app
-RUN npm install  
+WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-CMD ["node","client.js"] 
+RUN npm install
+RUN npm start
