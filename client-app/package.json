@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/client.js",
     "build:webpack": "NODE_ENV=production node_modules/.bin/webpack -p",
+    "build": "npm run build:webpack",
     "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "Ann S",
