@@ -107,17 +107,26 @@ Because the web-service uses 8080 and 8081 ports, they should be exposed in the 
 ### Overview
 
 The client application is quite a simple one-page Node.js React application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
-Node.js provides many very useful frameworks and modules which significantly simplify the process of development. In this the following list of frameworks is used:
+Node.js provides many very useful frameworks and libraries which significantly simplify the process of development. In this case plenty of them is used like axios, mocha, express and many others. They structure of the app is described in more details below.
 
-- **React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken into account this application is divided into following components:
+### Structure of the application
+
+**React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken into account this application is divided into following components:
 	
-    - **InputForm** components is responsible for showing header and the name input field. It stores the input value in its state in order to receive it to next components. Also it is able to check the validity of input name ( it can not containe special symbols &/\ and spaces) and stores this value in its state as well. The flag of name value's validity then is used by next component in order to show error message.
-    - **InputError** component is responsible for error message when it's something wrong with input data. It receives two props **className** and **errorMessage**. Based on **className** value (it can be disabled or enabled) the component decides to show error message or not.
-    - 
-    
-- **Express framework** makes the client listening to a 3000 port
-- **Request module** simplifies HTTP requests. Here is just one GET request to the server.
-- **Nock module** is a nice tool for testing HTTP requests. It allows us to mock some requests which we can't send directly while testing. For instance, it's not possible to send direct request to our server because it may not be available, so nock can mock this request with any desirable response, like so:
+- **InputForm** components is responsible for showing header and the name input field. It stores the input value in its state in order to receive it to next components. Also it is able to check the validity of input name ( it can not containe special symbols &/\ and spaces) and stores this value in its state as well. The flag of name value's validity then is used by next component in order to show error message.
+- **InputError** component is responsible for error message when it's something wrong with input data. It receives two props **className** and **errorMessage**. Based on **className** value (it can be disabled or enabled) the component decides to show error message or not.
+- **ResponseListContainer** component is responsible for main logic in the application. It sends reuests (by using **axios** library) and stores responses list in its state. Also this component provides two controls: **Say hello** button allows to make requests to the server and **Reset** button deletes all entries from the responses table.
+- **ResponseList** component finally renders each of responses. 
+
+In order to make the web app responsive and beautifuuly rendered on any device and browser, the special libraru **react-bootstrap** is used.
+
+As a packing tool **webpack** is used which requires **webpack.config** file. Also babel tool is used to transpile JSX into usual JavaScript. Webpack generates just one module **bundle.js** which already contains everything need to run the app.
+
+What makes the web client app a server listening to 3000 port is **Express framework**. Also there is **Request library** which simplifies HTTP requests. Here is just one GET request to the server.
+
+### Testing in the web client app
+
+**Nock module** is a nice tool for testing HTTP requests. It allows us to mock some requests which we can't send directly while testing. For instance, it's not possible to send direct request to the server because it may not be available, so nock can mock this request with any desirable response, like so:
 
         nock("http://172.18.0.22:8080")
           .defaultReplyHeaders({
@@ -129,11 +138,9 @@ Node.js provides many very useful frameworks and modules which significantly sim
               "content": "Hello, world!"
             });
         
-- **Supertest module** provides a high-level abstraction for testing HTTP
-- **Chai** is a BDD/TDD assertion library
-- **Mocha** is a JavaScript testing framework
-
-The web-interface is build with Bootstrap framework which makes the web-site responsive and beautiful on any device. But since it's a React application, the special library **react-bootstrap** is used.
+**Supertest module** provides a high-level abstraction for testing HTTP
+**Chai** is a BDD/TDD assertion library
+**Mocha** is a JavaScript testing framework
 
 
 ### Dockerfile
@@ -215,6 +222,7 @@ For the previous two stages both of the scripts **run_tests.sh** for client and 
 
 In the case of the client application it's:
 
+		RUN npm install --only=dev    # installs modules required only for testing
 		CMD npm test
         
 For the server app it should be:
