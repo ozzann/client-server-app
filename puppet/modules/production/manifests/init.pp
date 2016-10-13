@@ -30,8 +30,7 @@ class production {
     file { '/home/vagrant/remove_old_docker_images.sh':
 	source => 'puppet:///extra_files/remove_old_docker_images.sh',
 	path => '/home/vagrant',
-	owner => 'vagrant',
-	require => File['/home/vagrant/server-app']
+	owner => 'vagrant'
     }
 
     exec {'remove_old_images':
