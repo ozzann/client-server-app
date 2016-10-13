@@ -31,16 +31,14 @@ class production {
         path => '/usr/bin:/usr/sbin:/bin',
     }
 
-    file { 'remove_old_docker_images':
+    file { '/home/vagrant/remove_old_docker_images.sh':
 	source => 'puppet:///extra_files/remove_old_docker_images.sh',
-	path => '/home/vagrant',
-	owner => 'vagrant',
 	ensure => present
     }
 
     exec {'remove_old_images':
         require => File['remove_old_docker_images'],
-        command => "/bin/bash -c './remove_old_docker_images.sh'"
+        command => "/bin/bash -c 'chmod +x remove_old_docker_images.sh; ./remove_old_docker_images.sh'"
     }
 
     file { '/home/vagrant/docker-compose.yml':
