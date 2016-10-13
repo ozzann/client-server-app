@@ -1,8 +1,10 @@
-## The pipeline for deployment of client-server RESTful web-services
+## The pipeline for deployment of RESTful web-service and React web client app
 
-This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
-The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
-Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
+This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js React application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
+
+The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy both applications running in Docker containers, with a redeployment every time a change is checked in that builds and tests correctly.
+
+Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Because it's managed by puppet, there is also a virtual machine for Puppet Master.
 
 
 ## Prerequisites
@@ -106,12 +108,27 @@ Because the web-service uses 8080 and 8081 ports, they should be exposed in the 
 
 ### Overview
 
-The client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
-Node.js provides many very useful frameworks and modules which significantly simplify the process of development. In this the following list of frameworks is used:
+The client application is quite a simple one-page Node.js React application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
+Node.js provides many very useful frameworks and libraries which significantly simplify the process of development. In this case plenty of them is used like axios, mocha, express and many others. They structure of the app is described in more details below.
 
-- **Express framework** makes the client listening to a 3000 port
-- **Request module** simplifies HTTP requests. Here is just one GET request to the server.
-- **Nock module** is a nice tool for testing HTTP requests. It allows us to mock some requests which we can't send directly while testing. For instance, it's not possible to send direct request to our server because it may not be available, so nock can mock this request with any desirable response, like so:
+### Structure of the application
+
+**React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken this into account, the web client app is divided into following components:
+	
+- **InputForm** components is responsible for showing header and the name input field. It stores the name value in its state in order to send it to next components. Also it is able to check the validity of input name (name can not contain special symbols &/\ and spaces) and stores the flag of validity in its state as well. This value then is sent to next component in order to show error message.
+- **InputError** component is responsible for error message. It receives two props **className** and **errorMessage**. Based on **className** value (it can be disabled or enabled) the component decides to show error message or not.
+- **ResponseListContainer** component is responsible for main logic in the application. It sends reuests (by using **axios** library) and stores responses list in its state. Also this component provides two controls: **Say hello** button allows to make requests to the server and **Reset** button deletes all entries from the responses table.
+- **ResponseList** component finally renders each of responses into the table.
+
+In order to make the web app responsive and beautifully rendered on any device or browser, the special library **react-bootstrap** is used.
+
+As a packing tool **webpack** is used which requires **webpack.config** file. Also babel tool is used to transpile JSX into JavaScript. Webpack generates just one module **bundle.js** which already contains everything need to run the app.
+
+What makes the web client app a server listening to 3000 port is **Express framework**. Also there is **Request library** which simplifies HTTP requests. Here is just one GET request to the server.
+
+### Testing in the web client app
+
+**Nock module** is a nice tool for testing HTTP requests. It allows us to mock some requests which we can't send directly while testing. For instance, it's not possible to send direct request to the server because it may not be available, so nock can mock this request with any desirable response, like so:
 
         nock("http://172.18.0.22:8080")
           .defaultReplyHeaders({
@@ -123,25 +140,26 @@ Node.js provides many very useful frameworks and modules which significantly sim
               "content": "Hello, world!"
             });
         
-- **Supertest module** provides a high-level abstraction for testing HTTP
-- **Chai** is a BDD/TDD assertion library
-- **Mocha** is a JavaScript testing framework
-
-The web-interface is build with Bootstrap framework.
+**Supertest module** provides a high-level abstraction for testing HTTP
+**Chai** is a BDD/TDD assertion library
+**Mocha** is a JavaScript testing framework
 
 
 ### Dockerfile
 
-Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. The application's **package.json** file contains three scripts: **test** is for running tests, **build** is for bundling the whole application by **webpack** and **start** is finally for start the application. That's why to run the application one has to perform **npm install** command and **npm run build**, and then **npm start**. So, here is all these instructions put together in the Dockerfile:
 
     	FROM node:4-onbuild
 
     	ADD . /usr/src/app
-    	RUN npm install  
+        WORKDIR /usr/src/app
 
     	EXPOSE 3000
-
-    	CMD ["node","client.js"] 
+        
+        RUN npm install
+        RUN npm run build
+        
+    	CMD npm start
 
 
 
@@ -206,7 +224,8 @@ For the previous two stages both of the scripts **run_tests.sh** for client and 
 
 In the case of the client application it's:
 
-		CMD ["npm","test"]
+		RUN npm install --only=dev    # installs modules required only for testing
+		CMD npm test
         
 For the server app it should be:
 
@@ -236,7 +255,7 @@ One of the main advantages of Jenkins' pipelines is a descriptive graphical repr
 
 With Puppet, you can define the state of an IT infrastructure, and Puppet automatically enforces the desired state. Puppet automates every step of the software delivery process, from provisioning of physical and virtual machines to orchestration and reporting; from early-stage code development through testing, production release and updates.
 
-In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production, then removes old irrelevant docker images  **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and eventually runs docker compose.
+In this case Puppet installs docker to the production and remove all irrelevant previous docker images and containers. For this purpose **remove_old_docker_images.sh** script is used. Then it copies the application's source code inluding Dockerfile to the production, then removes old irrelevant docker images  **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and eventually runs docker compose.
 
 In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for the client and web-service apps are sent to **client-app** and **server-app** directories correspondingly by using rsync command in Jenkins pipeline.
 
