@@ -38,7 +38,7 @@ class production {
 
     exec {'remove_old_images':
         require => File['/home/vagrant/remove_old_docker_images.sh'],
-        command => "/bin/bash -c 'chmod +x remove_old_docker_images.sh; ./remove_old_docker_images.sh'"
+        command => "/bin/bash -c 'cd /home/vagrant; +x remove_old_docker_images.sh; ./remove_old_docker_images.sh'"
     }
 
     file { '/home/vagrant/docker-compose.yml':
