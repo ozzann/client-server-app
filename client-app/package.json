@@ -5,7 +5,12 @@
   "main": "client.js",
   "scripts": {
     "start": "node src/client.js",
+<<<<<<< HEAD
     "build": "NODE_ENV=production node_modules/.bin/webpack -p",
+=======
+    "build:webpack": "NODE_ENV=production node_modules/.bin/webpack -p",
+    "build": "npm run build:webpack",
+>>>>>>> e09889034cdc2496040e704b20645002389dec58
     "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "Ann S",
