@@ -111,8 +111,9 @@ Node.js provides many very useful frameworks and modules which significantly sim
 
 - **React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken into account this application is divided into following components:
 	
-    - InputForm components is responsible for swhoing header and the name input field. It stores the input value in its state in order to receive it to next components. Also it is able to check the validity of input name ( it can not containe special symbols &/\ and spaces) and stores this value in its state as well. The flag of name value's validity then is used by next component in order to show error message.
-    
+    - **InputForm** components is responsible for showing header and the name input field. It stores the input value in its state in order to receive it to next components. Also it is able to check the validity of input name ( it can not containe special symbols &/\ and spaces) and stores this value in its state as well. The flag of name value's validity then is used by next component in order to show error message.
+    - **InputError** component is responsible for error message when it's something wrong with input data. It receives two props **className** and **errorMessage**. Based on **className** value (it can be disabled or enabled) the component decides to show error message or not.
+    - 
     
 - **Express framework** makes the client listening to a 3000 port
 - **Request module** simplifies HTTP requests. Here is just one GET request to the server.
