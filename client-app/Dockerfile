@@ -5,6 +5,6 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-RUN npm install
-RUN npm build
-RUN npm start
+CMD ["npm","install"]
+CMD ["npm","build"]
+CMD ["npm", "start"]
