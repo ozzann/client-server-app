@@ -253,7 +253,7 @@ One of the main advantages of Jenkins' pipelines is a descriptive graphical repr
 
 With Puppet, you can define the state of an IT infrastructure, and Puppet automatically enforces the desired state. Puppet automates every step of the software delivery process, from provisioning of physical and virtual machines to orchestration and reporting; from early-stage code development through testing, production release and updates.
 
-In this case Puppet installs docker to the production, then it copies the application's source code inluding Dockerfile to the production, then removes old irrelevant docker images  **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and eventually runs docker compose.
+In this case Puppet installs docker to the production and remove all irrelevant previous docker images and containers. For this purpose **remove_old_docker_images.sh** script is used. Then it copies the application's source code inluding Dockerfile to the production, then removes old irrelevant docker images  **vagrant_client** and **vagrant_server** (their names are assigned automatically by docker compose) and eventually runs docker compose.
 
 In order to store all apps' files and then send them to the production, Puppet master has a static mount point **/etc/puppet/files**. Creation of this point is managed by **/etc/puppet/fileserver.conf** configuration file. Files for the client and web-service apps are sent to **client-app** and **server-app** directories correspondingly by using rsync command in Jenkins pipeline.
 
