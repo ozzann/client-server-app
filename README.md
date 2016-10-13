@@ -1,5 +1,7 @@
 ## The pipeline for deployment of RESTful web-service and React web client app
 
+![](https://cdn.rawgit.com/ozzann/client-server-app/master/web-client.png)
+
 This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js React application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
 
 The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy both applications running in Docker containers, with a redeployment every time a change is checked in that builds and tests correctly.
