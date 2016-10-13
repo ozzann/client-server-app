@@ -1,6 +1,6 @@
-## The pipeline for deployment of client-server RESTful web-services
+## The pipeline for deployment of RESTful web-service and React web client app
 
-This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
+This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js React application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
 The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
 Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
 
@@ -132,7 +132,7 @@ The web-interface is build with Bootstrap framework.
 
 ### Dockerfile
 
-Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. To run the application one has to perform **npm install** command and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. Its **package.json** file contains three scripts: **test** is for running tests, **build** is for bundling the whole application by **webpack** and **start** is finally for start the application. That's why to run the application one has to perform **npm install** command and **npm run build**, and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
 
     	FROM node:4-onbuild
 
@@ -140,8 +140,11 @@ Because it's a Node.js application, the base image is a node image. The applicat
     	RUN npm install  
 
     	EXPOSE 3000
-
-    	CMD ["node","client.js"] 
+        
+        RUN npm install
+        RUN npm run build
+        
+    	CMD npm start
 
 
 
@@ -206,7 +209,7 @@ For the previous two stages both of the scripts **run_tests.sh** for client and 
 
 In the case of the client application it's:
 
-		CMD ["npm","test"]
+		CMD npm test
         
 For the server app it should be:
 
