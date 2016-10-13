@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import NameInputField from './components/NameInputField';
+import InputForm from './components/InputForm';
 
 import { Grid, Well, Row, Col } from 'react-bootstrap';
 
