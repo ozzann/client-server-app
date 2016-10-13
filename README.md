@@ -2,7 +2,7 @@
 
 This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js React application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
 
-The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly.
+The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy both applications running in Docker containers, with a redeployment every time a change is checked in that builds and tests correctly.
 
 Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Because it's managed by puppet, there is also a virtual machine for Puppet Master.
 
@@ -113,16 +113,16 @@ Node.js provides many very useful frameworks and libraries which significantly s
 
 ### Structure of the application
 
-**React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken into account this application is divided into following components:
+**React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken this into account, the web client app is divided into following components:
 	
-- **InputForm** components is responsible for showing header and the name input field. It stores the input value in its state in order to receive it to next components. Also it is able to check the validity of input name ( it can not containe special symbols &/\ and spaces) and stores this value in its state as well. The flag of name value's validity then is used by next component in order to show error message.
-- **InputError** component is responsible for error message when it's something wrong with input data. It receives two props **className** and **errorMessage**. Based on **className** value (it can be disabled or enabled) the component decides to show error message or not.
+- **InputForm** components is responsible for showing header and the name input field. It stores the name value in its state in order to send it to next components. Also it is able to check the validity of input name (name can not contain special symbols &/\ and spaces) and stores the flag of validity in its state as well. This value then is sent to next component in order to show error message.
+- **InputError** component is responsible for error message. It receives two props **className** and **errorMessage**. Based on **className** value (it can be disabled or enabled) the component decides to show error message or not.
 - **ResponseListContainer** component is responsible for main logic in the application. It sends reuests (by using **axios** library) and stores responses list in its state. Also this component provides two controls: **Say hello** button allows to make requests to the server and **Reset** button deletes all entries from the responses table.
-- **ResponseList** component finally renders each of responses. 
+- **ResponseList** component finally renders each of responses into the table.
 
-In order to make the web app responsive and beautifuuly rendered on any device and browser, the special library **react-bootstrap** is used.
+In order to make the web app responsive and beautifully rendered on any device or browser, the special library **react-bootstrap** is used.
 
-As a packing tool **webpack** is used which requires **webpack.config** file. Also babel tool is used to transpile JSX into usual JavaScript. Webpack generates just one module **bundle.js** which already contains everything need to run the app.
+As a packing tool **webpack** is used which requires **webpack.config** file. Also babel tool is used to transpile JSX into JavaScript. Webpack generates just one module **bundle.js** which already contains everything need to run the app.
 
 What makes the web client app a server listening to 3000 port is **Express framework**. Also there is **Request library** which simplifies HTTP requests. Here is just one GET request to the server.
 
@@ -147,12 +147,12 @@ What makes the web client app a server listening to 3000 port is **Express frame
 
 ### Dockerfile
 
-Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. The application's **package.json** file contains three scripts: **test** is for running tests, **build** is for bundling the whole application by **webpack** and **start** is finally for start the application. That's why to run the application one has to perform **npm install** command and **npm run build**, and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. The application's **package.json** file contains three scripts: **test** is for running tests, **build** is for bundling the whole application by **webpack** and **start** is finally for start the application. That's why to run the application one has to perform **npm install** command and **npm run build**, and then **npm start**. So, here is all these instructions put together in the Dockerfile:
 
     	FROM node:4-onbuild
 
     	ADD . /usr/src/app
-    	RUN npm install  
+        WORKDIR /usr/src/app
 
     	EXPOSE 3000
         
