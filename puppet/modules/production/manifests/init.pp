@@ -45,7 +45,7 @@ class production {
         ensure => 'present',
         source => 'puppet:///extra_files/docker-compose.yml',
         owner => 'vagrant',
-        require => Exec['remove_old_images']
+        require => File['/home/vagrant/server-app']
     }
 
     class {'docker::compose':
