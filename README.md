@@ -2,7 +2,7 @@
 
 This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js React application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
 The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
-Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Becuase it's managed by puppet, there is also a virtual machine for Puppet Master.
+Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Because it's managed by puppet, there is also a virtual machine for Puppet Master.
 
 
 ## Prerequisites
@@ -106,9 +106,14 @@ Because the web-service uses 8080 and 8081 ports, they should be exposed in the 
 
 ### Overview
 
-The client application is quite a simple one-page Node.js application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
+The client application is quite a simple one-page Node.js React application. It listens to a port number 3000 and also implements REST API and provides a web-interface to access to the web-service.
 Node.js provides many very useful frameworks and modules which significantly simplify the process of development. In this the following list of frameworks is used:
 
+- **React** and **ReactDOM** are necessary libraries for any React application. The main idea of React approach is to divide an application into as many as possible logically distinctive components. Taken into account this application is divided into following components:
+	
+    - InputForm components is responsible for swhoing header and the name input field. It stores the input value in its state in order to receive it to next components. Also it is able to check the validity of input name ( it can not containe special symbols &/\ and spaces) and stores this value in its state as well. The flag of name value's validity then is used by next component in order to show error message.
+    
+    
 - **Express framework** makes the client listening to a 3000 port
 - **Request module** simplifies HTTP requests. Here is just one GET request to the server.
 - **Nock module** is a nice tool for testing HTTP requests. It allows us to mock some requests which we can't send directly while testing. For instance, it's not possible to send direct request to our server because it may not be available, so nock can mock this request with any desirable response, like so:
@@ -127,7 +132,7 @@ Node.js provides many very useful frameworks and modules which significantly sim
 - **Chai** is a BDD/TDD assertion library
 - **Mocha** is a JavaScript testing framework
 
-The web-interface is build with Bootstrap framework.
+The web-interface is build with Bootstrap framework which makes the web-site responsive and beautiful on any device. But since it's a React application, the special library **react-bootstrap** is used.
 
 
 ### Dockerfile
