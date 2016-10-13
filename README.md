@@ -1,7 +1,9 @@
 ## The pipeline for deployment of RESTful web-service and React web client app
 
 This repo contains client-server application and the pipeline for its deployment with different technologies like Docker, Jenkins, Puppet and Vagrant. Both client and server apps are RESTful web services. The client is a Node.js React application and it provides a web-interface. The server is a Java application, it's built with using Dropwizard framework. Also for both client and server there are automated functional tests.
-The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly. 
+
+The goal of this project is to build a pipeline from the GitHub repository through a Jenkins build to deploy an application running in a Docker container, with a redeployment every time a change is checked in that builds and tests correctly.
+
 Since the project is presented as simplified version of a deployment cycle, there are only three virtual machines. One of them runs Jenkins, the other one is supposed to be a Production system. Because it's managed by puppet, there is also a virtual machine for Puppet Master.
 
 
@@ -118,7 +120,7 @@ Node.js provides many very useful frameworks and libraries which significantly s
 - **ResponseListContainer** component is responsible for main logic in the application. It sends reuests (by using **axios** library) and stores responses list in its state. Also this component provides two controls: **Say hello** button allows to make requests to the server and **Reset** button deletes all entries from the responses table.
 - **ResponseList** component finally renders each of responses. 
 
-In order to make the web app responsive and beautifuuly rendered on any device and browser, the special libraru **react-bootstrap** is used.
+In order to make the web app responsive and beautifuuly rendered on any device and browser, the special library **react-bootstrap** is used.
 
 As a packing tool **webpack** is used which requires **webpack.config** file. Also babel tool is used to transpile JSX into usual JavaScript. Webpack generates just one module **bundle.js** which already contains everything need to run the app.
 
@@ -145,7 +147,7 @@ What makes the web client app a server listening to 3000 port is **Express frame
 
 ### Dockerfile
 
-Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. Its **package.json** file contains three scripts: **test** is for running tests, **build** is for bundling the whole application by **webpack** and **start** is finally for start the application. That's why to run the application one has to perform **npm install** command and **npm run build**, and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
+Because it's a Node.js application, the base image is a node image. The application is running on 3000 port, that's why it's exposed in the Dockerfile. The application's **package.json** file contains three scripts: **test** is for running tests, **build** is for bundling the whole application by **webpack** and **start** is finally for start the application. That's why to run the application one has to perform **npm install** command and **npm run build**, and then **node client.js** command. So, here is all these instructions put together in the Dockerfile:
 
     	FROM node:4-onbuild
 
