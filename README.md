@@ -141,10 +141,11 @@ What makes the web client app a server listening to 3000 port is **Express frame
               "id": 1,
               "content": "Hello, world!"
             });
-        
-**Supertest module** provides a high-level abstraction for testing HTTP
-**Chai** is a BDD/TDD assertion library
-**Mocha** is a JavaScript testing framework
+
+Other testing tools are:
+- **Supertest module** provides a high-level abstraction for testing HTTP
+- **Chai** is a BDD/TDD assertion library
+- **Mocha** is a JavaScript testing framework
 
 
 ### Dockerfile
