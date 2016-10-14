@@ -33,7 +33,7 @@ class production {
         require => File['/home/vagrant/client-app'],
         cwd => "/home/vagrant/client-app",
         command => "/bin/bash -c 'docker build -t client-app .'",
-        timeout => 500,
+        timeout => 1000,
      }
 
     exec {'rm -rf /home/vagrant/server-app/*':
